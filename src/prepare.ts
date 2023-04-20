@@ -24,11 +24,6 @@ export function prepare() {
     }
     console.log(`${reviewList('plugins.json', SummaryFilter.All)} working plugins found.`);
     reviewList('detailed-plugins.json', SummaryFilter.All, true);
-    console.log(`${reviewList('problem-plugins.json', SummaryFilter.Problem)} plugins that wont build.`);
-    console.log(`${reviewList('cap5-plugins.json', SummaryFilter.Capacitor5)} Capacitor 5 plugins found.`);
-    console.log(`${reviewList('cap4-plugins.json', SummaryFilter.Capacitor4)} Capacitor 4 plugins found.`);
-    console.log(`${reviewList('cap3-plugins.json', SummaryFilter.Capacitor3)} Capacitor 3 plugins found.`);
-    console.log(`${reviewList('cordova6-11-plugins.json', SummaryFilter.Cordova611)} Cordova plugins found.`);
     keywords();
 }
 
