@@ -1,4 +1,4 @@
-import { httpGet } from './cache.js';
+import { httpGet, rateLimited } from './cache.js';
 import { Inspection } from './inspection.js';
 
 interface GitHubInfo {
@@ -144,7 +144,7 @@ export async function inspectGitHubAPI(item: Inspection) {
         // https://github.com/capacitor-community/capacitor-googlemaps-native.git
         let part = item.repo.replace('https://github.com/', '').replace('.git', '').replace('ssh://git@', '');
         if (part.includes('#')) {
-            part = part.substring(0, part.indexOf('#')-1);
+            part = part.substring(0, part.indexOf('#') - 1);
         }
         let token = process.env.GH_PERSONAL_TOKEN;
 
@@ -158,17 +158,19 @@ export async function inspectGitHubAPI(item: Inspection) {
         } else {
             headers = { Authorization: `Bearer ${token}` };
         }
-        
+
         let retry = true;
         let gh: GitHubInfo;
+        let count = 0;
         while (retry) {
-            retry = false;            
+            retry = false;
             gh = await httpGet(`https://api.github.com/repos/${part}`, { headers });
             if (gh.stargazers_count == undefined) {
-                if ((gh as any).message?.startsWith('API rate limit exceeded')) {
-                    console.log(`Github API is rate limited.`);
+                if (rateLimited(gh)) {
                     retry = true;
-                    sleep(3000);
+                    count++;
+                    console.log(`   Retry ${count} for ${part}`);
+                    await sleep(1000 + Math.random() * 10000);
                 } else if ((gh as any).message?.startsWith('Not Found')) {
                     item.repo = undefined;
                 } else if (gh.full_name != part) {
@@ -177,7 +179,6 @@ export async function inspectGitHubAPI(item: Inspection) {
                 } else {
                     item.stars = 0;
                 }
-                return;
             }
         }
         item.stars = gh.stargazers_count;

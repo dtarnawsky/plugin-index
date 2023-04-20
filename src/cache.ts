@@ -14,8 +14,13 @@ export async function httpGet(url: string, opts: any): Promise<any> {
     }
     const response = await fetch(url, opts);
     const data = await response.json();
-    if (!data.message?.startsWith('API rate limit exceeded')) {
+    if (!rateLimited(data)) {
        cache[url] = data;
     }
     return data;
+}
+
+export function rateLimited(a : any): boolean {
+    return  ((a as any).message?.startsWith('API rate limit exceeded') ||
+    (a as any).message?.startsWith('You have exceeded a secondary rate limit'));
 }

@@ -36,33 +36,32 @@ async function go(plugins: string[], filterType: FilterType) {
         ios = true;
     }
 
+    // Capacitor 5 test
+    const capacitor5: TestInfo = {
+        ios: Test.capacitorIos5,
+        android: Test.capacitorAndroid5,
+    }
+
+    // Capacitor 4 test
+    const capacitor4: TestInfo = {
+        ios: Test.capacitorIos4,
+        android: Test.capacitorAndroid4,
+    }
+
+    // Capacitor 3 test
+    const capacitor3: TestInfo = {
+        ios: Test.capacitorIos3,
+        android: Test.capacitorAndroid3,
+    }
+
+    const cordova: TestInfo = {
+        ios: Test.cordovaIos6,
+        android: Test.cordovaAndroid11,
+    }
+
     for (const plugin of plugins) {
         count++;
-        console.log(`Inspecting ${count} of ${plugins.length}: ${plugin}`);                
-
-        // Capacitor 5 test
-        const capacitor5: TestInfo = {
-            ios: Test.capacitorIos5,
-            android: Test.capacitorAndroid5,
-        }
-
-        // Capacitor 4 test
-        const capacitor4: TestInfo = {
-            ios: Test.capacitorIos4,
-            android: Test.capacitorAndroid4,
-        }
-
-        // Capacitor 3 test
-        const capacitor3: TestInfo = {
-            ios: Test.capacitorIos3,
-            android: Test.capacitorAndroid3,
-        }
-
-        const cordova: TestInfo = {
-            ios: Test.cordovaIos6,
-            android: Test.cordovaAndroid11,
-        }
-
+        console.log(`Inspecting ${count} of ${plugins.length}: ${plugin}`);
         for (const test of [capacitor5, cordova, capacitor4, capacitor3]) {
             if (!android) {
                 test.android = Test.noOp;
@@ -72,14 +71,8 @@ async function go(plugins: string[], filterType: FilterType) {
             }
             const inspection = await inspect(plugin, test, filterType);
             catalog(inspection);
-            const removePlugin = inspection.fails.includes(Test.failedInNPM);
-            if (removePlugin) {
-                removeFromPluginList(inspection.name);
-            } else {
-                writePluginList(inspection.name);
-            }
+            writePluginList(inspection.name);
         }
     }
-
     prepare();
 }
