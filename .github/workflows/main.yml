@@ -1,5 +1,8 @@
 name: Run Plugin Inspection
 
+on:
+  workflow_dispatch:
+
 env:
   GH_PERSONAL_TOKEN_IONIC: ${{secrets.GH_PERSONAL_TOKEN_IONIC}}
   GH_PERSONAL_TOKEN: ${{secrets.GH_PERSONAL_TOKEN}}
