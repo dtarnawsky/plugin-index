@@ -8,6 +8,16 @@ import { prepare } from './prepare.js';
 const args = process.argv;
 const dep = args[2];
 
+
+if (!process.env.GH_PERSONAL_TOKEN) {
+    console.error(`GH_PERSONAL_TOKEN is undefined`);
+    process.exit();
+}
+if (!process.env.GH_PERSONAL_TOKEN_IONIC) {
+    console.error(`GH_PERSONAL_TOKEN_IONIC is undefined`);
+    process.exit();
+}
+
 if (hasArg('all', args) || !dep) {
     console.log('Inspecting all plugins...');
     go(readPluginList(), FilterType.all);
