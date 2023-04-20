@@ -1,0 +1,21 @@
+let cache = {};
+
+export function set(name: string, data: any) {
+    cache[name] = data;
+}
+
+export function get(name: string): any {
+    return cache[name];
+}
+
+export async function httpGet(url: string, opts: any): Promise<any> {
+    if (get(url)) {
+        return cache[url];
+    }
+    const response = await fetch(url, opts);
+    const data = await response.json();
+    if (!data.message?.startsWith('API rate limit exceeded')) {
+       cache[url] = data;
+    }
+    return data;
+}

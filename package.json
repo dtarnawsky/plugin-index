@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "npx tsc && node out/index.js all",
+    "prepare": "npm run start",    
+    "publish": "npm run start && cp data/index.html dist && netlify deploy --dir dist --prod"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}
