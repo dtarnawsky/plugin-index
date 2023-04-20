@@ -22,4 +22,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm run build --if-present
+      - run: git config --global user.email "you@example.com"
+      - run: git config --global user.name "Your Name"
+      - run: npm run start --if-present
+      - run: git commit -m 'update' && git push -u origin main
