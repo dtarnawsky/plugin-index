@@ -23,12 +23,14 @@
     <h2>Plugin Lists</h2>
     <p>Use the following links as a source of data:</p>
     <ul>
-        <li><a href="plugins.json">plugins.json</a> - A list of plugins that build with Capacitor or Cordova</li>
-        <li><a href="detailed-plugins.json">detailed-plugins.json</a> - A list of plugins that build with Capacitor or Cordova that includes all fields of the detailed plugin view (~1mb)</li>
+        <li><a href="plugins.json">plugins.json</a> - A list of plugins with name, description and keywords</li>
+        <li><a href="detailed-plugins.json">detailed-plugins.json</a> - A list of plugins that includes all fields of
+            the detailed plugin view (~1mb)</li>
         <li><a href="cap5-plugins.json">cap5-plugins.json</a> - A list of plugins that build with Capacitor 5</li>
         <li><a href="cap4-plugins.json">cap4-plugins.json</a> - A list of plugins that build with Capacitor 4</li>
         <li><a href="cap3-plugins.json">cap3-plugins.json</a> - A list of plugins that build with Capacitor 3</li>
-        <li><a href="cordova6-11-plugins.json">cordova6-11-plugins.json</a> - A list of plugins that build with Cordova (cordova-ios v6, cordova-android v11)</li>
+        <li><a href="cordova6-11-plugins.json">cordova6-11-plugins.json</a> - A list of plugins that build with Cordova
+            (cordova-ios v6, cordova-android v11)</li>
     </ul>
     <p>These are the fields from the plugin list</p>
     <ul>
@@ -39,17 +41,6 @@
         </li>
     </ul>
 
-
-
-    <h2>Plugin Details</h2>
-    <p>Each plugin has additional detailed information. Use the json lists above and you can find more details about a
-        plugin using the url: [plugin-name].json (where plugin-name has passed through encodeURIComponent)</p>
-    <p>Examples:</p>
-    <ul>
-        <li><a href="cordova-plugin-android-dark-mode-support.json">cordova-plugin-android-dark-mode-support.json</a>
-        </li>
-        <li><a href="%40capacitor-community%2Fapple-sign-in.json">%40capacitor-community%2Fapple-sign-in.json</a></li>
-    </ul>
     <p>These are the fields from the detailed plugin view</p>
     <ul>
         <li><b>name</b> - This is the name as it can be used with npm. Ie install with npm install [name]</li>
@@ -71,39 +62,6 @@
         <li><b>updated</b> - Date Time the github repo was last updated (useful for identifying unmaintained plugins)
         </li>
         <li><b>published</b> - Date Time when the package was published to npm</li>
-    </ul>
-
-    <h2>Tests</h2>
-    <p>When running tests it will use a starter project in a GitHub repo for particular versions of Capacitor or
-        Cordova. These projects are tested:
-    <ul>
-        <li><a href="https://github.com/dtarnawsky/plugin-test-capacitor-5">Capacitor 5</a> - capacitor-ios-5,
-            capacitor-android-5</li>
-        <li><a href="https://github.com/dtarnawsky/plugin-test-capacitor-4">Capacitor 4</a> - capacitor-ios-4,
-            capacitor-android-4</li>
-        <li><a href="https://github.com/dtarnawsky/plugin-test-capacitor-3">Capacitor 3</a> - capacitor-ios-3,
-            capacitor-android-3</li>
-        <li><a href="https://github.com/dtarnawsky/plugin-test-cordova-6-11.git">Cordova</a> - cordova-ios-6,
-            cordova-android-11</li>
-    </ul>
-    </p>
-    <h2>Test History</h2>
-    <p>A history json file containing the result of each test for a package and version can be found at /history:</p>
-    <p>Examples:</p>
-    <ul>
-        <li><a
-                href="history/%40capacitor-community%2Fadvertising-id.json">history/%40capacitor-community%2Fadvertising-id.json</a>
-        </li>
-    </ul>
-
-    <p>These are the fields from the test history</p>
-    <ul>
-        <li><b>tests</b> - This is an array of tests. A test has the fields below:</li>
-        <li><b>test</b> - Name of the test. eg cordova-ios-6, cordova-android-11, capacitor-ios-3, capacitor-android-4
-        </li>
-        <li><b>version</b> - Version number of the plugin</li>
-        <li><b>failure</b> - If the test failed then what step it failed in. eg peer-dependencies, cap-sync</li>
-        <li><b>success</b> - A boolean indicating success on the test (true) or failure (false)</li>
     </ul>
 </body>
 

@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "start": "npx tsc && node out/index.js all",
-    "prepare": "npm run start",    
+    "prepare": "npm run start",
     "publish": "npm run start && cp data/index.html dist && netlify deploy --dir dist --prod"
   },
   "devDependencies": {
