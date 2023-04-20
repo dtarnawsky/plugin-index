@@ -1,4 +1,5 @@
 import { httpGet } from "./cache.js"
+import { Inspection } from "./inspection.js"
 
 export interface NPMView {
   _id: string
@@ -56,8 +57,6 @@ export interface DistTags {
   next: string
 }
 
-
-
 export interface Repository {
   type: string
   url: string
@@ -66,8 +65,6 @@ export interface Repository {
 export interface Bugs {
   url: string
 }
-
-
 
 export interface Dist {
   integrity: string
@@ -91,26 +88,46 @@ export interface NpmOperationalInternal {
   tmp: string
 }
 
+export interface NPMInfo {
+  downloads: number
+  start: string
+  end: string
+  package: string
+}
+
 export async function getNpmView(name: string, latest: boolean): Promise<NPMView> {
   let url = '';
   try {
-    const token = process.env.NPM_PERSONAL_TOKEN;
-    let headers = {};
-    if (!token || token == '') {
-      console.warn(`NPM API calls can use a tokenby setting environment variable NPM_PERSONAL_TOKEN`);
-    } else {
-        headers = { Authorization: `Bearer ${token}` };
-    }
     url = latest
       ? `https://registry.npmjs.org/${encodeURIComponent(name)}/latest`
       : `https://registry.npmjs.org/${encodeURIComponent(name)}`;
     // const response = await fetch(url, { headers });
     // const np: NPMView = await response.json() as NPMView;
-    const np: NPMView = await httpGet(url, { headers });
+    const np: NPMView = await httpGet(url, npmHeaders());
     np.versions = undefined;
     np.version = np['dist-tags'] ? np['dist-tags'].latest : np.version;
     return np;
   } catch (error) {
     console.error(`getNpmView Failed ${url}`, error);
   }
+}
+
+export async function inspectNpmAPI(item: Inspection) {
+  try {
+      const np: NPMInfo = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${item.name}`, npmHeaders());        
+      item.downloads = np.downloads;
+  } catch (error) {
+      console.error('inspectNpmAPI Failed', error.message);
+  }
+}
+
+function npmHeaders(): any {
+  const token = process.env.NPM_PERSONAL_TOKEN;
+  let headers = {};
+  if (!token || token == '') {
+    console.warn(`NPM API calls can use a tokenby setting environment variable NPM_PERSONAL_TOKEN`);
+  } else {
+      headers = { Authorization: `Bearer ${token}`, referrer:'https://ionic.io/plugin-index' };
+  }
+  return headers;
 }

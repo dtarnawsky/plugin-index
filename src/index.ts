@@ -28,14 +28,6 @@ if (hasArg('all', args) || !dep) {
 async function go(plugins: string[], filterType: FilterType) {
     let count = 0;
 
-    // Where we only do iOS or Android tests
-    let android = hasArg('android', args);
-    let ios = hasArg('ios', args);
-    if (!android && !ios) {
-        android = true;
-        ios = true;
-    }
-
     // Capacitor 5 test
     const capacitor5: TestInfo = {
         ios: Test.capacitorIos5,
@@ -63,12 +55,6 @@ async function go(plugins: string[], filterType: FilterType) {
         count++;
         console.log(`Inspecting ${count} of ${plugins.length}: ${plugin}`);
         for (const test of [capacitor5, cordova, capacitor4, capacitor3]) {
-            if (!android) {
-                test.android = Test.noOp;
-            }
-            if (!ios) {
-                test.ios = Test.noOp;
-            }
             const inspection = await inspect(plugin, test, filterType);
             catalog(inspection);
             writePluginList(inspection.name);

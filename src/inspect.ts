@@ -1,9 +1,8 @@
 import { Inspection } from './inspection.js';
 import { Test, TestInfo, TestNames } from './test.js';
-import { NPMView, getNpmView } from './npm-view.js';
+import { NPMView, getNpmView, inspectNpmAPI } from './npm-view.js';
 import { readPlugin } from './catalog.js';
 import { inspectGitHubAPI } from './github.js';
-import { inspectNpmAPI } from './npm-stat.js';
 import { FilterType } from './filter.js';
 
 export async function inspect(plugin: string, info: TestInfo, filterType: FilterType): Promise<Inspection> {
