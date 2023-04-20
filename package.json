@@ -7,8 +7,8 @@
     "publish": "npm run start && cp data/index.html dist && netlify deploy --dir dist --prod"
   },
   "devDependencies": {
-    "@types/node": "^18.15.5",
-    "typescript": "^5.0.2"
+    "@types/node": "18.15.12",
+    "typescript": "5.0.4"
   },
   "dependencies": {
     "node-fetch": "^3.3.1"
