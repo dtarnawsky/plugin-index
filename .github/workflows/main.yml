@@ -1,11 +1,14 @@
-name: Node.js CI
+name: Run Plugin Inspection
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
+env:
+  GH_PERSONAL_TOKEN_IONIC: ${{secrets.GH_PERSONAL_TOKEN_IONIC}}
+  GH_PERSONAL_TOKEN: ${{secrets.GH_PERSONAL_TOKEN}}
+  NPM_PERSONAL_TOKEN: ${{secrets.NPM_PERSONAL_TOKEN}}
 jobs:
   build:
 
@@ -22,7 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: git config --global user.email "you@example.com"
-      - run: git config --global user.name "Your Name"
+      - run: git config --global user.email "damian@ionic.io"
+      - run: git config --global user.name "Damian Tarnawsky"
       - run: npm run start --if-present
       - run: git commit -m 'update' && git push -u origin main
