@@ -1,10 +1,5 @@
 name: Run Plugin Inspection
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
 env:
   GH_PERSONAL_TOKEN_IONIC: ${{secrets.GH_PERSONAL_TOKEN_IONIC}}
   GH_PERSONAL_TOKEN: ${{secrets.GH_PERSONAL_TOKEN}}
