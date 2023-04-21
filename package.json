@@ -3,7 +3,7 @@
   "scripts": {
     "start": "npx tsc && node out/index.js all",
     "build": "npm run start && npm run commit",
-    "commit": "git commit -m 'update' && git push -u origin main",
+    "commit": "git add -A -- . && git commit -m 'update' && git push -u origin main",
     "publish": "npm run start && cp data/index.html dist && netlify deploy --dir dist --prod"
   },
   "devDependencies": {
