@@ -2,14 +2,15 @@
   "type": "module",
   "scripts": {
     "start": "npx tsc && node out/index.js all",
-    "build": "npm run start",    
-    "publish": "cp data/index.html dist && netlify deploy --dir dist --prod"
+    "build": "npm run start",
+    "publish": "cp data/index.html www && npx netlify deploy --dir www --prod"
   },
   "devDependencies": {
     "@types/node": "18.15.12",
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "netlify-cli": "^14.2.1",
     "node-fetch": "^3.3.1"
   }
 }
