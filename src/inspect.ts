@@ -119,8 +119,8 @@ function likelyCordova(p: NPMView): boolean {
     if (p.cordova?.platforms) return true;
     if (p.engines && p.engines['cordova']) return true;
     if (p.dependencies && p.dependencies['cordova-android']) return true;
-    if (p.dependencies && p.dependencies['cordova-ios']) return true;
-    if (p.name.startsWith('cordova-plugin-')) return true; // We dont extract the package to see if there is a plugin.xml but this is close enough
+    if (p.dependencies && p.dependencies['cordova-ios']) return true;    
+    if (p.name.includes('cordova-'))  return true; // We dont extract the package to see if there is a plugin.xml but this is close enough
     return false;
 }
 
