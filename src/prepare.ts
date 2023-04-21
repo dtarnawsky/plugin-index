@@ -38,7 +38,7 @@ function reviewList(filename: string, filter: SummaryFilter, fullDetails?: boole
         }
 
     }
-    const indent = (filter == SummaryFilter.Problem) ? 2 : 0;
+    const indent = 2;
     writeFileSync(join('www', filename), JSON.stringify(result, undefined, indent), 'utf-8');
     return count;
 }
