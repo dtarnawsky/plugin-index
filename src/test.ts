@@ -1,3 +1,6 @@
+export const minCapacitorVersion = 2;
+export const maxCapacitorVersion = 5;
+
 export enum Test {
     capacitorIos5 = 'capacitor-ios-5',
     capacitorAndroid5 = 'capacitor-android-5',

@@ -1,5 +1,5 @@
 import { Inspection } from './inspection.js';
-import { Test, TestInfo, TestNames } from './test.js';
+import { Test, TestInfo, TestNames, maxCapacitorVersion, minCapacitorVersion } from './test.js';
 import { NPMView, getNpmView, inspectNpmAPI } from './npm-view.js';
 import { readPlugin } from './catalog.js';
 import { inspectGitHubAPI } from './github.js';
@@ -65,7 +65,7 @@ async function prepareProject(plugin: string, result: Inspection, test: TestInfo
         await inspectNpmAPI(result);
     } catch (e) {
         console.error(`Failed preparation for ${plugin}`);
-    }    
+    }
 }
 
 function cleanUrl(url: string): string {
@@ -79,10 +79,29 @@ function getCapacitorVersions(p: NPMView): string[] {
     let cap: string = capCoreDeps(p);
     const result = [];
     if (likelyCordova(p)) {
-        cap = '^3.0.0 | ^4.0.0 | ^5.0.0'; // Assume it works with Cap 3,4,5
+        const t = [];
+        for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
+            t.push(`^${version}.0.0`);
+        }
+        cap = t.join(' | ');        
     }
-    for (let version = 2; version < 20; version++) {
-        if (cap?.includes(`^${version}`) || cap?.includes(`>=${version}`) || cap?.includes(`>= ${version}`)) {
+    for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
+        let match = false;
+        
+        if (cap?.includes(`>`) && !cap?.includes(`>=`)) {
+            const t = cap.split('>');
+            const min = parseInt(t[1].trim());
+            if (version > min) {
+                match = true;
+            }
+        } else if (cap?.includes(`>=`)) {
+            const t = cap.split('>=');
+            const min = parseInt(t[1].trim());
+            if (version >= min) {
+                match = true;
+            }
+        }
+        if (cap?.includes(`^${version}`) || cap?.includes(`>=${version}`) || match) {
             result.push(`capacitor-ios-${version}`);
             result.push(`capacitor-android-${version}`);
         }
@@ -119,8 +138,8 @@ function likelyCordova(p: NPMView): boolean {
     if (p.cordova?.platforms) return true;
     if (p.engines && p.engines['cordova']) return true;
     if (p.dependencies && p.dependencies['cordova-android']) return true;
-    if (p.dependencies && p.dependencies['cordova-ios']) return true;    
-    if (p.name.includes('cordova-'))  return true; // We dont extract the package to see if there is a plugin.xml but this is close enough
+    if (p.dependencies && p.dependencies['cordova-ios']) return true;
+    if (p.name.includes('cordova-')) return true; // We dont extract the package to see if there is a plugin.xml but this is close enough
     return false;
 }
 
