@@ -126,8 +126,10 @@ function npmHeaders(): any {
   let headers = {};
   if (!token || token == '') {
     console.warn(`NPM API calls can use a tokenby setting environment variable NPM_PERSONAL_TOKEN`);
-  } else {
-      headers = { Authorization: `Bearer ${token}`, referrer:'https://ionic.io/plugin-index' };
+  } else {      
+      headers['Authorization'] = `bearer ${token}`;
+      headers['User-Agent'] = 'Ionic Plugin Explorer';
+      headers['Accept'] = '*/*';
   }
   return headers;
 }

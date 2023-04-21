@@ -1,4 +1,5 @@
 @admob-plus/capacitor
+@ionic-enterprise/apple-pay
 @adobe/cordova-acpanalytics
 @adobe/cordova-acpcore
 @adriaano/multi-contact-picker-plugin
@@ -151,7 +152,6 @@
 @ionic-enterprise/android-permissions
 @ionic-enterprise/app-rate
 @ionic-enterprise/app-version
-@ionic-enterprise/apple-pay
 @ionic-enterprise/apple-payment-pass
 @ionic-enterprise/auth
 @ionic-enterprise/badge
