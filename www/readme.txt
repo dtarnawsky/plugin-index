@@ -1,1 +1,1 @@
-The folder contains the generated output
+The folder contains the generated output.
