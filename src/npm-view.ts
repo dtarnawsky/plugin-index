@@ -99,8 +99,8 @@ export async function getNpmView(name: string, latest: boolean): Promise<NPMView
   let url = '';
   try {
     url = latest
-      ? `https://registry.npmjs.org/${encodeURIComponent(name)}/latest`
-      : `https://registry.npmjs.org/${encodeURIComponent(name)}`;
+      ? `https://registry.npmjs.org/${name}/latest`
+      : `https://registry.npmjs.org/${name}`;
     // const response = await fetch(url, { headers });
     // const np: NPMView = await response.json() as NPMView;
     const np: NPMView = await httpGet(url, npmHeaders());
@@ -123,13 +123,14 @@ export async function inspectNpmAPI(item: Inspection) {
 
 function npmHeaders(): any {
   const token = process.env.NPM_PERSONAL_TOKEN;
-  let headers = {};
+  let opts: any = { };
   if (!token || token == '') {
     console.warn(`NPM API calls can use a tokenby setting environment variable NPM_PERSONAL_TOKEN`);
   } else {      
-      headers['Authorization'] = `bearer ${token}`;
-      headers['User-Agent'] = 'Ionic Plugin Explorer';
-      headers['Accept'] = '*/*';
+     opts.headers = { };
+     opts.headers['Authorization'] = `bearer ${token}`;
+     opts.headers['User-Agent'] = 'Ionic Plugin Explorer';
+     opts.headers['Accept'] = '*/*';
   }
-  return headers;
+  return opts;
 }
