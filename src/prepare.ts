@@ -18,9 +18,9 @@ enum SummaryFilter {
  * Creates the summarized result files
  */
 export function prepare() {
-    // Dist and history folders needed
-    if (!existsSync('dist')) {
-        mkdirSync('dist');
+    // www and history folders needed
+    if (!existsSync('www')) {
+        mkdirSync('www');
     }
     console.log(`${reviewList('plugins.json', SummaryFilter.All)} working plugins found.`);
     reviewList('detailed-plugins.json', SummaryFilter.All, true);
@@ -39,7 +39,7 @@ function reviewList(filename: string, filter: SummaryFilter, fullDetails?: boole
 
     }
     const indent = (filter == SummaryFilter.Problem) ? 2 : 0;
-    writeFileSync(join('dist', filename), JSON.stringify(result, undefined, indent), 'utf-8');
+    writeFileSync(join('www', filename), JSON.stringify(result, undefined, indent), 'utf-8');
     return count;
 }
 
@@ -60,8 +60,7 @@ function keywords() {
         }
     }
     result.sort();
-    const filename = 'keywords.json';
-    writeFileSync(join('dist', filename), JSON.stringify(result, undefined, 2), 'utf-8');
+    writeFileSync(join('www', 'keywords.json'), JSON.stringify(result, undefined, 2), 'utf-8');
     console.log(`${result.length} keywords found`);
 }
 
