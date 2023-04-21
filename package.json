@@ -2,9 +2,8 @@
   "type": "module",
   "scripts": {
     "start": "npx tsc && node out/index.js all",
-    "build": "npm run start && npm run commit",
-    "commit": "git add -A -- . && git commit -m 'update' && git push -u origin main",
-    "publish": "npm run start && cp data/index.html dist && netlify deploy --dir dist --prod"
+    "build": "npm run start",    
+    "publish": "cp data/index.html dist && netlify deploy --dir dist --prod"
   },
   "devDependencies": {
     "@types/node": "18.15.12",

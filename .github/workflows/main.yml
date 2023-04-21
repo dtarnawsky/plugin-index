@@ -26,3 +26,4 @@ jobs:
       - run: git config --global user.email "damian@ionic.io"
       - run: git config --global user.name "Damian Tarnawsky"
       - run: npm run build --if-present
+      - run: npm run publish --if-present
