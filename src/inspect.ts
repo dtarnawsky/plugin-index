@@ -46,13 +46,13 @@ async function prepareProject(plugin: string, result: Inspection, test: TestInfo
             }
         }
 
-        if (v.cordova) {
-            result.platforms = v.cordova.platforms;
+        if (vlatest.cordova) {
+            result.platforms = vlatest.cordova.platforms;
         }
-        if (v.capacitor) {
+        if (vlatest.capacitor) {
             result.platforms = [];
-            if (v.capacitor.ios) result.platforms.push('ios');
-            if (v.capacitor.android) result.platforms.push('android');
+            if (vlatest.capacitor.ios) result.platforms.push('ios');
+            if (vlatest.capacitor.android) result.platforms.push('android');
         }
     } catch (error) {
         console.error(`Failed preparation for ${plugin}:${error}`);
