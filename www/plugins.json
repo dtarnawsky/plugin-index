@@ -906,17 +906,6 @@
       ]
     },
     {
-      "name": "@capacitor/motion",
-      "description": "The Motion API tracks accelerometer and device orientation (compass heading, etc.)",
-      "keywords": [
-        "cross",
-        "platform",
-        "css",
-        "html",
-        "pwa"
-      ]
-    },
-    {
       "name": "@capacitor/network",
       "description": "The Network API provides network and connectivity information.",
       "keywords": [
@@ -1349,17 +1338,6 @@
       "keywords": []
     },
     {
-      "name": "@hmscore/cordova-plugin-hms-account",
-      "description": "Huawei Account Cordova Plugin",
-      "keywords": [
-        "account",
-        "huawei account",
-        "huawei",
-        "hms account",
-        "hms"
-      ]
-    },
-    {
       "name": "@hmscore/cordova-plugin-hms-location",
       "description": "Cordova HMS Location Plugin",
       "keywords": [
@@ -1620,16 +1598,6 @@
       ]
     },
     {
-      "name": "@ionic/portals",
-      "description": "SDK Plugin for Ionic Portals",
-      "keywords": []
-    },
-    {
-      "name": "@ironsource-plus/cordova-plugin",
-      "description": "Support for ironSource ads in Cordova and Phonegap apps",
-      "keywords": []
-    },
-    {
       "name": "@ironsource-plus/mediation-admob",
       "description": "IronSource Mediation Adapter for AdMob",
       "keywords": [
@@ -1841,13 +1809,6 @@
       "description": "Moodle's fork of a general purpose intent shim layer for cordova appliations on Android. Handles various techniques for sending and receiving intents.",
       "keywords": [
         "intent"
-      ]
-    },
-    {
-      "name": "@moodlehq/cordova-plugin-ionic-webview",
-      "description": "Moodle's fork of Ionic Web View Engine Plugin",
-      "keywords": [
-        "wkwebview"
       ]
     },
     {
@@ -2484,11 +2445,6 @@
       ]
     },
     {
-      "name": "appboy-cordova-sdk",
-      "description": "<img src=\"https://github.com/Appboy/appboy-cordova-sdk/blob/master/braze-logo.png\" width=\"300\" title=\"Braze Logo\" />",
-      "keywords": []
-    },
-    {
       "name": "appsflyer-capacitor-plugin",
       "description": "AppsFlyer SDK plugin for Capacitor",
       "keywords": []
@@ -2552,18 +2508,6 @@
         "tcp",
         "cordova wp8",
         "wp8"
-      ]
-    },
-    {
-      "name": "branch-cordova-sdk",
-      "description": "Branch Metrics Cordova SDK",
-      "keywords": [
-        "branch sdk",
-        "branch",
-        "sdk",
-        "deep links",
-        "deep",
-        "links"
       ]
     },
     {
@@ -3328,14 +3272,6 @@
       ]
     },
     {
-      "name": "caredfor-cordova-zoom",
-      "description": "caredfor supporting cordova zoom plugin",
-      "keywords": [
-        "zoom",
-        "caredfor"
-      ]
-    },
-    {
       "name": "cashfree-pg-capacitor",
       "description": "Cashfree PG plugin for capacitor",
       "keywords": [
@@ -3566,6 +3502,14 @@
       ]
     },
     {
+      "name": "community-admob-plus-cordova",
+      "description": "Trustable Google AdMob Cordova Plugin",
+      "keywords": [
+        "admob",
+        "monetization"
+      ]
+    },
+    {
       "name": "contacts-plugin",
       "description": "this is for get contacts",
       "keywords": []
@@ -3679,21 +3623,6 @@
         "domob",
         "rjfun"
       ]
-    },
-    {
-      "name": "cordova-android-firebase-gradle-release",
-      "description": "Cordova/Phonegap plugin for Android to align versions of the Firebase library components specified by other plugins to a specific version.",
-      "keywords": []
-    },
-    {
-      "name": "cordova-android-play-services-gradle-release",
-      "description": "Cordova/Phonegap plugin for Android to align versions of the Play Services library components specified by other plugins to a specific version",
-      "keywords": []
-    },
-    {
-      "name": "cordova-android-support-gradle-release",
-      "description": "Cordova/Phonegap plugin to align various versions of the Android Support libraries specified by other plugins to a specific version",
-      "keywords": []
     },
     {
       "name": "cordova-androidx-build",
@@ -3859,15 +3788,6 @@
       "keywords": []
     },
     {
-      "name": "cordova-documentpicker",
-      "description": "iOS plugin for Cordova writting in Swift.",
-      "keywords": [
-        "documentpicker",
-        "icloud",
-        "filebrowser"
-      ]
-    },
-    {
       "name": "cordova-fabric-plugin",
       "description": "Cordova Fabric.io Plugin",
       "keywords": [
@@ -3904,19 +3824,6 @@
       ]
     },
     {
-      "name": "cordova-honeywell-plugin",
-      "description": "Cordova Plugin to receive scanned code from a Honeywell scanner (CT50, CT60, D75E, others?).",
-      "keywords": []
-    },
-    {
-      "name": "cordova-honeywell-scanner-simplified",
-      "description": "Ionic/Cordova Honeywell Scanner Simplified Plugin for the built-in barcodes scanner.",
-      "keywords": [
-        "honeywell",
-        "barcodes"
-      ]
-    },
-    {
       "name": "cordova-hot-code-push-plugin",
       "description": "Cordova plugin to perform code updates on the fly",
       "keywords": [
@@ -3941,18 +3848,6 @@
       "description": "This plugin sets ITSAppUsesNonExemptEncryption to false in *-Info.plist file",
       "keywords": [
         "cordova ios plugin"
-      ]
-    },
-    {
-      "name": "cordova-ios-plugin-userdefaults",
-      "description": "This plugin is used to save and load data to the app groups. It is used to share data between App and Share Extension.",
-      "keywords": [
-        "userdefaults",
-        "app groups",
-        "app",
-        "groups",
-        "cordova ios plugin",
-        "nsuserdefaults"
       ]
     },
     {
@@ -3992,17 +3887,6 @@
       "keywords": []
     },
     {
-      "name": "cordova-nb-honeywell-scanner",
-      "description": "Correction of neo9/cordova-honeywell-scanner plugin to use EAN8, EAN13...",
-      "keywords": [
-        "honeywell",
-        "aidc",
-        "scanner",
-        "com.honeywell.aidc",
-        "sdk"
-      ]
-    },
-    {
       "name": "cordova-open-native-settings",
       "description": "Native settings opener for Cordova",
       "keywords": [
@@ -4040,15 +3924,6 @@
         "pdf",
         "pdf generation",
         "generation"
-      ]
-    },
-    {
-      "name": "cordova-play-install-referrer",
-      "description": "Play Install Referrer wrapper for Cordova",
-      "keywords": [
-        "play",
-        "install",
-        "referrer"
       ]
     },
     {
@@ -4220,6 +4095,14 @@
       ]
     },
     {
+      "name": "cordova-plugin-advanced-websocket",
+      "description": "Cordova Plugin for using WebSockets",
+      "keywords": [
+        "websocket",
+        "browser"
+      ]
+    },
+    {
       "name": "cordova-plugin-aes256-encryption",
       "description": "This cordova ionic plugin allows you to perform AES 256 encryption and decryption on the plain text. It's a cross-platform plugin which supports both Android and iOS. The encryption and decryption are performed on the device native layer so that the perfo",
       "keywords": [
@@ -4367,16 +4250,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-androidx",
-      "description": "Cordova/Phonegap plugin to enable AndroidX",
-      "keywords": []
-    },
-    {
-      "name": "cordova-plugin-androidx-adapter",
-      "description": "Cordova/Phonegap plugin to migrate any code which references the legacy Android Support Library to the new AndroidX mappings in a Cordova Android platform project.",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-androidx-socialsharing",
       "description": "Share text, images (and other files), or a link via the native sharing widget of your device. Android is fully supported, as well as iOS 6 and up. WP8 has somewhat limited support.",
       "keywords": [
@@ -4439,13 +4312,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-app-launcher",
-      "description": "This plugin allows you to see if other apps are installed and launch them. On Android, you can send extras to the launched Activity and receive result data (if available), as well as retrieve a list of applications that can open a specified uri.",
-      "keywords": [
-        "launcher"
-      ]
-    },
-    {
       "name": "cordova-plugin-app-preferences",
       "description": "Application preferences plugin and preference pane generator",
       "keywords": [
@@ -4480,15 +4346,6 @@
         "updater",
         "dynamic",
         "app update"
-      ]
-    },
-    {
-      "name": "cordova-plugin-app-version",
-      "description": "Cordova plugin to return the version number of the current app",
-      "keywords": [
-        "app",
-        "version",
-        "appversion"
       ]
     },
     {
@@ -4536,13 +4393,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-apple-login",
-      "description": "## Install",
-      "keywords": [
-        "sign in with apple"
-      ]
-    },
-    {
       "name": "cordova-plugin-apple-pay-google-pay-with-environment",
       "description": "Cordova plugin for integrating Apple Pay and Google Pay in modern cordova apps",
       "keywords": [
@@ -4572,20 +4422,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-applepay",
-      "description": "An adapted Cordova plugin to provide Apple Pay functionality.",
-      "keywords": [
-        "apple pay",
-        "apple",
-        "pay"
-      ]
-    },
-    {
-      "name": "cordova-plugin-applepay-stripe",
-      "description": "An adapted Cordova plugin to provide Apple Pay functionality with Stripe integration. Based on cordova-plugin-applepay.",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-applovin-max",
       "description": "AppLovin MAX Cordova Plugin for Android and iOS",
       "keywords": [
@@ -4600,11 +4436,6 @@
         "minimize",
         "minimizes"
       ]
-    },
-    {
-      "name": "cordova-plugin-apprate",
-      "description": "<a href=\"https://badge.fury.io/js/cordova-plugin-apprate\" target=\"_blank\"><img height=\"21\" style='border:0px;height:21px;' border='0' src=\"https://badge.fury.io/js/cordova-plugin-apprate.svg\" alt=\"NPM Version\"></a> <a href='https://www.npmjs.org/package/c",
-      "keywords": []
     },
     {
       "name": "cordova-plugin-appsettings",
@@ -4632,11 +4463,6 @@
     {
       "name": "cordova-plugin-attestation",
       "description": "\nThis is pcv plugin for Attestation in Cordova!\n    ",
-      "keywords": []
-    },
-    {
-      "name": "cordova-plugin-audio-recorder",
-      "description": "Record Audio easily with the device microphone",
       "keywords": []
     },
     {
@@ -4707,14 +4533,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-back-as-home",
-      "description": "Cordova Android back-as-home Plugin",
-      "keywords": [
-        "back",
-        "button"
-      ]
-    },
-    {
       "name": "cordova-plugin-background-audio",
       "description": "\n\t\tBackground Audio for iOS\n\n\t\tWhen included within a cordova/phonegap build then the application will support background audio for iOS\n\t\tout of the box. No further action is necessary.\n\n\t\tThis negates having to use location/other solutions that may not b",
       "keywords": [
@@ -4752,11 +4570,6 @@
         "windows uwp",
         "uwp"
       ]
-    },
-    {
-      "name": "cordova-plugin-background-mode-appstronauts",
-      "description": "Prevent app from going to sleep in background.",
-      "keywords": []
     },
     {
       "name": "cordova-plugin-background-mode-bluetooth-central",
@@ -4872,38 +4685,6 @@
       "description": "Cordova Battery Plugin",
       "keywords": [
         "battery"
-      ]
-    },
-    {
-      "name": "cordova-plugin-bb-app",
-      "description": "BlackBerry 10 Application APIs",
-      "keywords": [
-        "cordova blackberry10",
-        "application",
-        "config"
-      ]
-    },
-    {
-      "name": "cordova-plugin-bb-contacts",
-      "description": "BlackBerry 10 Contacts APIs",
-      "keywords": [
-        "cordova blackberry10",
-        "pim",
-        "contacts"
-      ]
-    },
-    {
-      "name": "cordova-plugin-bb-pimlib",
-      "description": "BlackBerry 10 PIM Library",
-      "keywords": [
-        "cordova blackberry10"
-      ]
-    },
-    {
-      "name": "cordova-plugin-bb-utils",
-      "description": "BlackBerry 10 Utilities Library",
-      "keywords": [
-        "cordova blackberry10"
       ]
     },
     {
@@ -5156,16 +4937,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-camera-preview",
-      "description": "Cordova plugin that allows camera interaction from HTML code for showing camera preview below or on top of the HTML.",
-      "keywords": [
-        "camera",
-        "cam",
-        "camera preview",
-        "preview"
-      ]
-    },
-    {
       "name": "cordova-plugin-camera-stream",
       "description": "Get an stream from the iOS device to enable the camera view on an HTML element",
       "keywords": []
@@ -5214,15 +4985,6 @@
         "chooser",
         "picker",
         "file chooser"
-      ]
-    },
-    {
-      "name": "cordova-plugin-chrome-apps-common",
-      "description": "This plugin is a dependency for a few other chromium plugins.",
-      "keywords": [
-        "chrome",
-        "common",
-        "util"
       ]
     },
     {
@@ -5277,16 +5039,6 @@
         "cleartext",
         "usescleartexttraffic",
         "android9"
-      ]
-    },
-    {
-      "name": "cordova-plugin-clipboard",
-      "description": "BlackBerry 10 Community Contributed API to access the system clipboard",
-      "keywords": [
-        "clipboard",
-        "copy",
-        "paste",
-        "cordova blackberry10"
       ]
     },
     {
@@ -5455,11 +5207,6 @@
         "webview",
         "engine"
       ]
-    },
-    {
-      "name": "cordova-plugin-crypto-file",
-      "description": "This plugin to encrypt/decrypt the source files.",
-      "keywords": []
     },
     {
       "name": "cordova-plugin-cszbar",
@@ -5755,13 +5502,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-documentpicker",
-      "description": "iOS plugin for Cordova writting in Swift.",
-      "keywords": [
-        "documentpicker"
-      ]
-    },
-    {
       "name": "cordova-plugin-doze-optimize",
       "description": "If you want to run your application in backround mode and it shoud standby even battery optimization enabled, then this Cordova plugin is used to check the doze or battery optimization status and also it help to request whitlest popup for battery optimiza",
       "keywords": [
@@ -5796,14 +5536,6 @@
       "description": "Plugin for Dynamsoft Barcode Reader",
       "keywords": [
         "barcode"
-      ]
-    },
-    {
-      "name": "cordova-plugin-eddystone",
-      "description": "Cordova/PhoneGap plugin for Eddystone beacons.",
-      "keywords": [
-        "eddystone",
-        "beacons"
       ]
     },
     {
@@ -5854,14 +5586,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-enable-multidex",
-      "description": "Enable multidex for Cordova Android apps with over 64K methods",
-      "keywords": [
-        "multidex",
-        "cordova android plugin"
-      ]
-    },
-    {
       "name": "cordova-plugin-epson-epos2",
       "description": "Cordova Plugin integrating the Epson ePOS2 SDK for iOS and Android",
       "keywords": [
@@ -5870,16 +5594,6 @@
         "epos2",
         "epson",
         "printer"
-      ]
-    },
-    {
-      "name": "cordova-plugin-epson-tm",
-      "description": "A simple Cordova plugin for printing receipts from an Epson TM printer.",
-      "keywords": [
-        "epson",
-        "epos",
-        "printer",
-        "receipt"
       ]
     },
     {
@@ -6031,36 +5745,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-fcm",
-      "description": "Google Firebase Cloud Messaging Cordova Push Plugin",
-      "keywords": [
-        "notifications",
-        "push",
-        "firebase",
-        "fcm"
-      ]
-    },
-    {
-      "name": "cordova-plugin-fcm-with-dependecy-updated",
-      "description": "Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated",
-      "keywords": [
-        "notifications",
-        "push",
-        "firebase",
-        "fcm"
-      ]
-    },
-    {
-      "name": "cordova-plugin-fcm-with-dependecy-updated-12",
-      "description": "Google Firebase Cloud Messaging Cordova Push Plugin fork with dependecy updated",
-      "keywords": [
-        "notifications",
-        "push",
-        "firebase",
-        "fcm"
-      ]
-    },
-    {
       "name": "cordova-plugin-ffmpeg",
       "description": "Cordova FFMPEG plugin with ffmpeg kit",
       "keywords": [
@@ -6074,11 +5758,6 @@
         "file",
         "browser"
       ]
-    },
-    {
-      "name": "cordova-plugin-file-opener",
-      "description": "This plugin allows you to open files in Android. Plugin is especially made to handle application package (.apk) installation process by providing functionality for opening the application after the installation has finished.",
-      "keywords": []
     },
     {
       "name": "cordova-plugin-file-opener2",
@@ -6197,15 +5876,6 @@
         "firebase",
         "remote config",
         "analytics"
-      ]
-    },
-    {
-      "name": "cordova-plugin-firebase-core",
-      "description": "Adds support for Firebase to your Cordova/PhoneGap apps.",
-      "keywords": [
-        "firebase",
-        "google",
-        "core"
       ]
     },
     {
@@ -6343,16 +6013,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-flurryanalytics",
-      "description": "Ads support for Flurry Analytics to Cordova and Phonegap apps",
-      "keywords": [
-        "flurry analytics",
-        "flurry",
-        "analytics",
-        "phonegap plugin"
-      ]
-    },
-    {
       "name": "cordova-plugin-foreground-service",
       "description": "Foreground service with ongoing notification.",
       "keywords": [
@@ -6455,37 +6115,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-googleplus",
-      "description": "Use your Google account to authenticate with the app.",
-      "keywords": [
-        "google",
-        "google signin",
-        "google sign in",
-        "googlesignin",
-        "google login",
-        "google plus",
-        "login",
-        "oauth",
-        "identity",
-        "authentication",
-        "google sign",
-        "sign",
-        "in"
-      ]
-    },
-    {
-      "name": "cordova-plugin-gpsmockchecker",
-      "description": "This is a cordova plugin to avoid mock locations.",
-      "keywords": [
-        "cordova gps",
-        "mock",
-        "location",
-        "checker",
-        "mock location",
-        "mock gps"
-      ]
-    },
-    {
       "name": "cordova-plugin-gyroscope",
       "description": "Cordova Device Gyroscope Plugin",
       "keywords": []
@@ -6511,31 +6140,9 @@
       ]
     },
     {
-      "name": "cordova-plugin-health",
-      "description": "A plugin that abstracts fitness and health repositories like Apple HealthKit or Google Fit",
-      "keywords": [
-        "healthkit",
-        "google fit",
-        "health",
-        "fitness",
-        "google",
-        "fit",
-        "mhealth"
-      ]
-    },
-    {
       "name": "cordova-plugin-hms-analytics",
       "description": "## Installing",
       "keywords": []
-    },
-    {
-      "name": "cordova-plugin-honeywell-barcode-scanner",
-      "description": "Cordova plugin for Android Honeywell barcode scanner.",
-      "keywords": [
-        "honeywell",
-        "barcode",
-        "scanner"
-      ]
     },
     {
       "name": "cordova-plugin-hotspot",
@@ -6602,15 +6209,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-ignore-lint-translation",
-      "description": "Ignores Android MissingTranslation and ExtraTranslationduring Gradle lintVitalRelease task",
-      "keywords": [
-        "ignore",
-        "lint",
-        "translation"
-      ]
-    },
-    {
       "name": "cordova-plugin-image-picker",
       "description": "This plugin allows selection of multiple images from the camera roll / gallery in a phonegap app",
       "keywords": []
@@ -6620,15 +6218,6 @@
       "description": "Cordova / Phonegap plugin for resizing images",
       "keywords": [
         "device"
-      ]
-    },
-    {
-      "name": "cordova-plugin-imagedownloader",
-      "description": "The cordova plugin for downloading image into gallery.",
-      "keywords": [
-        "image",
-        "downloader",
-        "gallery"
       ]
     },
     {
@@ -6651,38 +6240,6 @@
         "inappbrowser",
         "paypal",
         "braintree"
-      ]
-    },
-    {
-      "name": "cordova-plugin-inapppurchase",
-      "description": "A lightweight cordova plugin for in app purchases on iOS and Android with a simple promise based API.",
-      "keywords": [
-        "purchase",
-        "purchases",
-        "payments",
-        "in",
-        "app",
-        "promise",
-        "promises",
-        "itunes",
-        "google",
-        "play"
-      ]
-    },
-    {
-      "name": "cordova-plugin-inapppurchase-2",
-      "description": "A lightweight cordova plugin for in app purchases on iOS and Android with a simple promise based API.",
-      "keywords": [
-        "purchase",
-        "purchases",
-        "payments",
-        "in",
-        "app",
-        "promise",
-        "promises",
-        "itunes",
-        "google",
-        "play"
       ]
     },
     {
@@ -6749,21 +6306,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-ionic-keyboard",
-      "description": "Ionic Keyboard Plugin",
-      "keywords": [
-        "keyboard"
-      ]
-    },
-    {
-      "name": "cordova-plugin-ionic-webview",
-      "description": "Ionic Web View Engine Plugin",
-      "keywords": [
-        "wkwebview",
-        "webview"
-      ]
-    },
-    {
       "name": "cordova-plugin-ionic-webview-openblank",
       "description": "Cordova WKWebView OpenBlank Plugin",
       "keywords": [
@@ -6771,20 +6313,6 @@
         "webview",
         "iframe",
         "openblank"
-      ]
-    },
-    {
-      "name": "cordova-plugin-ionic-wkwebview-engine",
-      "description": "The official Apache Cordova WKWebView Engine Plugin",
-      "keywords": [
-        "wkwebview"
-      ]
-    },
-    {
-      "name": "cordova-plugin-ionic4-crosswalk-webview",
-      "description": "Ionic Crosswalk Web View Engine Plugin",
-      "keywords": [
-        "wkwebview"
       ]
     },
     {
@@ -6921,38 +6449,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-iposprinter",
-      "description": "Cordova wrapper for iPosPrinter Service",
-      "keywords": [
-        "thermal",
-        "printer",
-        "esc",
-        "pos",
-        "esc/pos",
-        "iposprinter",
-        "iposprinterservice"
-      ]
-    },
-    {
-      "name": "cordova-plugin-ironsource",
-      "description": "Ads support for ironSource ads to Cordova and Phonegap apps",
-      "keywords": []
-    },
-    {
-      "name": "cordova-plugin-ironsource-ads",
-      "description": "Ironsource ads for cordova based development",
-      "keywords": [
-        "ironsource ads",
-        "ironsource",
-        "ads"
-      ]
-    },
-    {
-      "name": "cordova-plugin-ironsource-ads-mediation-adcolony-adapter",
-      "description": "<p align=\"left\"> <img src=\"https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square\"> <img src=\"https://img.shields.io/badge/Support%20for%20IronSource%20Framework%20Version-6.7.3-blue.svg?style=flat-square\"> </p>",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-ironsource-sdk",
       "description": "Iron source sdk for cordova based development",
       "keywords": [
@@ -7014,13 +6510,6 @@
       "keywords": [
         "jpush",
         "push"
-      ]
-    },
-    {
-      "name": "cordova-plugin-jumio-mobilesdk",
-      "description": "This package is no longer supported and has been deprecated. To avoid malicious use, npm is hanging on to the package name.",
-      "keywords": [
-        "registry"
       ]
     },
     {
@@ -7169,28 +6658,10 @@
       ]
     },
     {
-      "name": "cordova-plugin-local-notifications",
-      "description": "[![PayPayl donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=L3HKQCD9UA35A \"Donate once-off to this project using Paypal\")",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-local-webserver",
       "description": "Cordova Local Web Server Plugin",
       "keywords": [
         "local web server"
-      ]
-    },
-    {
-      "name": "cordova-plugin-localization-strings",
-      "description": "Cordova Plugin for handling localization strings on InfoPlist.strings and Localizable.strings on iOS, strings.xml on Android",
-      "keywords": [
-        "i18n",
-        "internationalization",
-        "l10n",
-        "localization",
-        "strings.xml",
-        "infoplist.strings",
-        "localizable.strings"
       ]
     },
     {
@@ -7720,27 +7191,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-photo-library",
-      "description": "Plugin that just gets photos from the gallery",
-      "keywords": [
-        "display photos",
-        "display",
-        "photos",
-        "photo library",
-        "photo"
-      ]
-    },
-    {
-      "name": "cordova-plugin-photo-library-sism",
-      "description": "Plugin that saves photos to the gallery / camera roll. Actually updated so it almost always works.",
-      "keywords": []
-    },
-    {
-      "name": "cordova-plugin-photo-library-wkwebview",
-      "description": "Plugin that just gets photos from the gallery",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-photo-viewer",
       "description": "This plugin is intended to show a picture from an URL into a Photo Viewer with zoom features.",
       "keywords": [
@@ -7863,24 +7313,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-powermanagement-orig",
-      "description": "Plugin for managing the power state (i.e. idle switching) for cordova 3.0+. The original one.",
-      "keywords": [
-        "cordova wp7",
-        "wp7",
-        "cordova wp8",
-        "wp8"
-      ]
-    },
-    {
-      "name": "cordova-plugin-presentation",
-      "description": "Throwing screen",
-      "keywords": [
-        "presentaion",
-        "screen"
-      ]
-    },
-    {
       "name": "cordova-plugin-prevent-override",
       "description": "Cordova Prevent Override Plugin",
       "keywords": []
@@ -7976,39 +7408,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-proguard",
-      "description": "Cordova plugin for ProGuard",
-      "keywords": [
-        "proguard",
-        "optimize",
-        "shrink",
-        "minify",
-        "obfuscate",
-        "tool",
-        "android development",
-        "development",
-        "androidutils",
-        "apk size",
-        "apk",
-        "size",
-        "bytecode",
-        "cordova android plugin",
-        "gradle",
-        "gradle plugin",
-        "hybrid apps",
-        "hybrid",
-        "apps",
-        "minifier",
-        "obfuscator",
-        "optimization tools",
-        "optimization",
-        "tools",
-        "optimizer",
-        "proguard rules",
-        "rules"
-      ]
-    },
-    {
       "name": "cordova-plugin-purchase",
       "description": "Cordova Purchase plugin for iOS, Android, Windows (AppStore, Play, UWP)",
       "keywords": [
@@ -8055,18 +7454,6 @@
         "reader",
         "browser",
         "nw.js"
-      ]
-    },
-    {
-      "name": "cordova-plugin-qrcodejs",
-      "description": "Cordova plugin for generating QR code",
-      "keywords": [
-        "qrcodejs",
-        "qr",
-        "qr code",
-        "qr generator",
-        "generator",
-        "qrcode"
       ]
     },
     {
@@ -8130,11 +7517,6 @@
     {
       "name": "cordova-plugin-quickpay",
       "description": "Plugin for TLPrompt Project",
-      "keywords": []
-    },
-    {
-      "name": "cordova-plugin-reboot",
-      "description": "This plugin exposes command to reboot android device. Works only on rooted devices",
       "keywords": []
     },
     {
@@ -8314,15 +7696,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-screen-edges",
-      "description": "NPM fork of the cordova-plugin-screen-edges by EddyVerbruggen",
-      "keywords": [
-        "screen",
-        "edges",
-        "fork"
-      ]
-    },
-    {
       "name": "cordova-plugin-screen-locker",
       "description": "Plugin allows lock and unlock device screen by calling plugin",
       "keywords": [
@@ -8420,39 +7793,9 @@
       ]
     },
     {
-      "name": "cordova-plugin-shake",
-      "description": "Cordova Plugin to detect when a physical device performs a shake gesture.",
-      "keywords": [
-        "shake",
-        "gesture",
-        "accelerometer",
-        "acceleration",
-        "detection"
-      ]
-    },
-    {
-      "name": "cordova-plugin-shortcuts-android",
-      "description": "Cordova plugin for Android to create app shortcuts and handle intents.",
-      "keywords": [
-        "shortcut",
-        "intent"
-      ]
-    },
-    {
       "name": "cordova-plugin-sideloaded",
       "description": "A Cordova plugin that checks if an android app was side loaded or downloaded from the play store.",
       "keywords": []
-    },
-    {
-      "name": "cordova-plugin-sign-in-with-apple",
-      "description": "This plugin only supports iOS >= 13.",
-      "keywords": [
-        "apple",
-        "sign in with apple",
-        "sign",
-        "in",
-        "with"
-      ]
     },
     {
       "name": "cordova-plugin-sim",
@@ -8678,11 +8021,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-stepcounter",
-      "description": "Uses the step counter service APIs introduced in Android 4.4 KitKat to, you guessed it, count the number of steps whomever is holding the device running your app takes.",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-stetho-android",
       "description": "Plugin to integrate with Stetho a debug bridge for Android applications",
       "keywords": [
@@ -8692,16 +8030,6 @@
         "snyk product",
         "snyk",
         "product"
-      ]
-    },
-    {
-      "name": "cordova-plugin-streaming-media",
-      "description": "This plugin allows you to stream audio and video in a fullscreen, native player on iOS and Android.",
-      "keywords": [
-        "media",
-        "streaming",
-        "cordova fireos",
-        "fireos"
       ]
     },
     {
@@ -8747,15 +8075,6 @@
       "name": "cordova-plugin-telerik-imagepicker",
       "description": "This plugin allows selection of multiple images from the camera roll / gallery in a phonegap app",
       "keywords": []
-    },
-    {
-      "name": "cordova-plugin-telerik-imagepicker2",
-      "description": "This plugin allows selection of multiple images from the camera roll / gallery in a phonegap app",
-      "keywords": [
-        "imagepicker:cordova",
-        "image",
-        "picker"
-      ]
     },
     {
       "name": "cordova-plugin-theflyy",
@@ -8832,19 +8151,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-transfer",
-      "description": "Use the way Pause and Resume to download files or fileStream for Cordova and PhoneGap",
-      "keywords": [
-        "pause",
-        "and",
-        "resume",
-        "download",
-        "file",
-        "files",
-        "stream"
-      ]
-    },
-    {
       "name": "cordova-plugin-transport-security",
       "description": "Cordova / PhoneGap Plugin to allow 'Arbitrary Loads' by adding a declaration to the Info.plist file to bypass the iOS 9 App Transport Security",
       "keywords": [
@@ -8896,19 +8202,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-uid",
-      "description": "Cordova plugin to get unique identifiers: UUID, IMEI, IMSI, ICCID and MAC.",
-      "keywords": [
-        "uid",
-        "imei",
-        "imsi",
-        "uuid",
-        "sim",
-        "iccid",
-        "mac"
-      ]
-    },
-    {
       "name": "cordova-plugin-unique-device-id2",
       "description": "PhoneGap / Cordova unique device id (UUID) plugin for Android, iOS and Windows Phone 8.",
       "keywords": [
@@ -8943,14 +8236,6 @@
       "description": "Cordova plugin for showing a notification for app updates.",
       "keywords": [
         "hacktoberfest"
-      ]
-    },
-    {
-      "name": "cordova-plugin-upi",
-      "description": "This Plugin allows you receive payment via UPI.",
-      "keywords": [
-        "upi",
-        "npci"
       ]
     },
     {
@@ -9088,11 +8373,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-videoplayer",
-      "description": "cordova-plugin-videoplayer",
-      "keywords": []
-    },
-    {
       "name": "cordova-plugin-volume-control",
       "description": "Cordova Volume Control Plugin",
       "keywords": [
@@ -9149,21 +8429,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-webintent",
-      "description": "WebIntent Android Plugin for Cordova 3.X By Boris Smus",
-      "keywords": [
-        "webintent",
-        "boris smus"
-      ]
-    },
-    {
-      "name": "cordova-plugin-webserver",
-      "description": "publish",
-      "keywords": [
-        "registry"
-      ]
-    },
-    {
       "name": "cordova-plugin-webserver2",
       "description": "Cordova Plugin Webserver",
       "keywords": [
@@ -9193,13 +8458,6 @@
       "name": "cordova-plugin-webview",
       "description": "Cordova webview plugin",
       "keywords": []
-    },
-    {
-      "name": "cordova-plugin-webview-checker",
-      "description": "Checks whether Android System WebView is installed and enabled or not on Cordova.",
-      "keywords": [
-        "webview"
-      ]
     },
     {
       "name": "cordova-plugin-wechat",
@@ -9237,14 +8495,6 @@
       ]
     },
     {
-      "name": "cordova-plugin-wifiinfo",
-      "description": "Cordova plugin for gathering WiFi network information",
-      "keywords": [
-        "wifi",
-        "info"
-      ]
-    },
-    {
       "name": "cordova-plugin-wifiwizard2",
       "description": "Cordova WiFi Manager for Android and iOS",
       "keywords": [
@@ -9265,22 +8515,6 @@
       "description": "Cordova WKWebView Cookies Plugin",
       "keywords": [
         "wkwebviewcookies"
-      ]
-    },
-    {
-      "name": "cordova-plugin-wkwebview-engine",
-      "description": "The official Apache Cordova WKWebView Engine Plugin",
-      "keywords": [
-        "wkwebview"
-      ]
-    },
-    {
-      "name": "cordova-plugin-wkwebview-engine-localhost",
-      "description": "Cordova plugin for serving using http://localhost instead of file://",
-      "keywords": [
-        "local",
-        "wkwebview",
-        "localhost"
       ]
     },
     {
@@ -9370,11 +8604,6 @@
         "cordova plugin ymchat",
         "ymchat"
       ]
-    },
-    {
-      "name": "cordova-plugin-youtube-video-player",
-      "description": "**Play Youtube Videos in a native Video Player on Android &amp; iOS.**",
-      "keywords": []
     },
     {
       "name": "cordova-plugin-zbtprinter",
@@ -9487,19 +8716,6 @@
       ]
     },
     {
-      "name": "cordova-spotify-oauth",
-      "description": "Cordova plugin for authenticating with Spotify",
-      "keywords": [
-        "spotify",
-        "oauth",
-        "android lib",
-        "lib",
-        "ios lib",
-        "oauth2",
-        "serverless"
-      ]
-    },
-    {
       "name": "cordova-sqlcipher-adapter",
       "description": "SQLCipher database adapter for PhoneGap/Cordova, based on cordova-sqlite-storage",
       "keywords": [
@@ -9590,11 +8806,6 @@
       ]
     },
     {
-      "name": "cordova-urovo-pda-plugin",
-      "description": "Cordova plugin for Urovo PDA barcode scanner",
-      "keywords": []
-    },
-    {
       "name": "cordova-uxcam",
       "description": "Cordova plugin for UXCam - enables the recording of your applications screen",
       "keywords": [
@@ -9602,15 +8813,6 @@
         "analytics",
         "screen capture",
         "screen recording"
-      ]
-    },
-    {
-      "name": "cordova-watchconnectivity-plugin",
-      "description": "cordova-watchconnectivity-plugin",
-      "keywords": [
-        "watchos",
-        "apple",
-        "watchconnectivity"
       ]
     },
     {
@@ -10111,22 +9313,6 @@
       "keywords": []
     },
     {
-      "name": "skwas-cordova-plugin-datetimepicker",
-      "description": "Cordova DateTime picker plugin",
-      "keywords": [
-        "datetime",
-        "datetimepicker",
-        "datepicker",
-        "timepicker",
-        "phonegap plugin"
-      ]
-    },
-    {
-      "name": "stocknow",
-      "description": "## Project setup ``` npm install ```",
-      "keywords": []
-    },
-    {
       "name": "swipe-infinea-barcode-scanner",
       "description": "swipe infinea barcode scanner capacitor plugin",
       "keywords": []
@@ -10154,21 +9340,6 @@
     {
       "name": "test-plugin",
       "description": "Test plugin",
-      "keywords": []
-    },
-    {
-      "name": "thermal-printer-cordova-plugin",
-      "description": "Cordova wrapper for ESC/POS Thermal Printer library",
-      "keywords": [
-        "thermal",
-        "printer",
-        "esc",
-        "pos",
-        "esc/pos"
-      ]
-    },
-    {
-      "name": "thermal_telpo_printer",
       "keywords": []
     },
     {

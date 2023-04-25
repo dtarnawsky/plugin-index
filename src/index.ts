@@ -1,5 +1,5 @@
 import { inspect } from './inspect.js';
-import { catalog, readPluginList, removeFromPluginList, writePluginList } from './catalog.js';
+import { catalog, readPluginList } from './catalog.js';
 import { hasArg } from './utils.js';
 import { filter, FilterType } from './filter.js';
 import { Test, TestInfo } from './test.js';
@@ -67,7 +67,6 @@ async function go(plugins: string[], filterType: FilterType) {
         for (const test of [capacitor5, cordova, capacitor4, capacitor3]) {
             const inspection = await inspect(plugin, test, filterType);
             catalog(inspection);
-            writePluginList(inspection.name);
         }
     }
     prepare();

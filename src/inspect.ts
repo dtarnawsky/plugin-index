@@ -1,13 +1,13 @@
 import { Inspection } from './inspection.js';
 import { Test, TestInfo, TestNames, maxCapacitorVersion, minCapacitorVersion } from './test.js';
 import { NPMView, getNpmView, inspectNpmAPI } from './npm-view.js';
-import { readPlugin } from './catalog.js';
+import { readPlugin, removeFromPluginList } from './catalog.js';
 import { inspectGitHubAPI } from './github.js';
 import { FilterType } from './filter.js';
 
 export async function inspect(plugin: string, info: TestInfo, filterType: FilterType): Promise<Inspection> {
     const result: Inspection = readPlugin(plugin);
-    await prepareProject(plugin, result, info);
+    await prepareProject(plugin, result);
     if (filterType == FilterType.failed || filterType == FilterType.missing) {
         if (result.success.includes(info.android)) {
             info.android = Test.noOp;
@@ -20,7 +20,7 @@ export async function inspect(plugin: string, info: TestInfo, filterType: Filter
 }
 
 // This returns false only if the plugin could not be found
-async function prepareProject(plugin: string, result: Inspection, test: TestInfo): Promise<void> {
+async function prepareProject(plugin: string, result: Inspection): Promise<void> {
     const priorVersion = result.version;
     let v, vlatest: NPMView;
     try {
@@ -38,14 +38,6 @@ async function prepareProject(plugin: string, result: Inspection, test: TestInfo
         result.license = v.license;
         result.repo = cleanUrl(v.repository?.url);
         result.keywords = v.keywords;
-        result.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
-        result.fails = [];
-        for (const test of TestNames) {
-            if (!result.success.includes(test as any)) {
-                result.fails.push(test as any);
-            }
-        }
-
         if (vlatest.cordova) {
             result.platforms = vlatest.cordova.platforms;
         }
@@ -53,6 +45,15 @@ async function prepareProject(plugin: string, result: Inspection, test: TestInfo
             result.platforms = [];
             if (vlatest.capacitor.ios) result.platforms.push('ios');
             if (vlatest.capacitor.android) result.platforms.push('android');
+        }
+
+        result.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
+        result.success = cleanupBasedOnPlatforms(result.success, result.platforms);
+        result.fails = [];
+        for (const test of TestNames) {
+            if (!result.success.includes(test as any)) {
+                result.fails.push(test as any);
+            }
         }
     } catch (error) {
         console.error(`Failed preparation for ${plugin}:${error}`);
@@ -75,6 +76,13 @@ function cleanUrl(url: string): string {
     return url;
 }
 
+function cleanupBasedOnPlatforms(tests: Test[], platforms: string[]): Test[] {
+    return tests.filter((test) => {
+        return (test.includes('ios') && platforms.includes('ios')) ||
+            (test.includes('android') && platforms.includes('android'))
+    });
+}
+
 function getCapacitorVersions(p: NPMView): string[] {
     let cap: string = capCoreDeps(p);
     const result = [];
@@ -83,11 +91,11 @@ function getCapacitorVersions(p: NPMView): string[] {
         for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
             t.push(`^${version}.0.0`);
         }
-        cap = t.join(' | ');        
+        cap = t.join(' | ');
     }
     for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
         let match = false;
-        
+
         if (cap?.includes(`>`) && !cap?.includes(`>=`)) {
             const t = cap.split('>');
             const min = parseInt(t[1].trim());
@@ -109,7 +117,8 @@ function getCapacitorVersions(p: NPMView): string[] {
     if (result.length == 0) {
         if (!likelyCordova(p)) {
             if (!cap) {
-                console.error(`Warning: ${p.name} does not seem to be Capacitor or Cordova based.`);
+                console.error(`Error: ${p.name} does not seem to be Capacitor or Cordova based. The package will be removed.`);
+                removeFromPluginList(p.name);
             } else {
                 console.error(`Warning ${p.name} is Capacitor based but dependent on @capacitor/core "${cap}"`);
             }
