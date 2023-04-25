@@ -34,7 +34,10 @@ async function prepareProject(plugin: string, result: Inspection): Promise<void>
         result.author = v.author;
         result.description = v.description;
         result.bugs = v.bugs?.url;
-        result.published = v.time?.modified;
+        result.published = v.time[v.version];
+        if (!result.published) {
+            result.published = v?.created;
+        }
         result.license = v.license;
         result.repo = cleanUrl(v.repository?.url);
         result.keywords = v.keywords;
