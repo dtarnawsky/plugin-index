@@ -478,6 +478,7 @@ com.testfairy.cordova-plugin
 com.unarin.cordova.beacon
 com.virtuoworks.cordova-plugin-canvascamera
 com.wikitude.phonegap.wikitudeplugin
+community-admob-plus-cordova
 contacts-plugin
 cordova-admob
 cordova-admob-ads
