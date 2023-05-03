@@ -1,4 +1,4 @@
-import { httpGet } from "./cache.js"
+import { httpGet } from "./http.js"
 import { PluginInfo } from "./plugin-info.js"
 import { getNpmToken } from "./secrets.js"
 
@@ -102,18 +102,16 @@ export async function getNpmInfo(name: string, latest: boolean): Promise<NpmInfo
     url = latest
       ? `https://registry.npmjs.org/${name}/latest`
       : `https://registry.npmjs.org/${name}`;
-    // const response = await fetch(url, { headers });
-    // const np: NPMView = await response.json() as NPMView;
     const np: NpmInfo = await httpGet(url, npmHeaders());
     np.versions = undefined;
     np.version = np['dist-tags'] ? np['dist-tags'].latest : np.version;
     return np;
   } catch (error) {
-    console.error(`getNpmView Failed ${url}`, error);
+    console.error(`getNpmInfo Failed ${url}`, error);
   }
 }
 
-export async function inspectNpmAPI(plugin: PluginInfo) {
+export async function applyNpmDownloads(plugin: PluginInfo) {
   try {
       const np: NpmDownloads = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${plugin.name}`, npmHeaders());        
       plugin.downloads = np.downloads;

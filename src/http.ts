@@ -1,22 +1,10 @@
-let cache = {};
-
-export function set(name: string, data: any) {
-    cache[name] = data;
-}
-
-export function get(name: string): any {
-    return cache[name];
-}
-
 export async function httpGet(url: string, opts: any): Promise<any> {
-    if (get(url)) {
-        return cache[url];
-    }
+
     const response = await fetch(url, opts);
     try {
         const data = await response.json();
-        if (!rateLimited(data)) {
-            cache[url] = data;
+        if (rateLimited(data)) {
+            console.log(`The api call ${url} was rate limited.`)            
         }
         return data;
     } catch (error) {

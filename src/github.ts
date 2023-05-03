@@ -1,4 +1,4 @@
-import { httpGet, rateLimited } from './cache.js';
+import { httpGet, rateLimited } from './http.js';
 import { PluginInfo } from './plugin-info.js';
 import { getGitHubToken, getIonicGithubToken } from './secrets.js';
 
@@ -138,11 +138,9 @@ interface Organization {
     site_admin: boolean
 }
 
-export async function inspectGitHubAPI(plugin: PluginInfo) {
+export async function applyGithubInfo(plugin: PluginInfo) {
     try {
         // call api (eg https://api.github.com/repos/capawesome-team/capacitor-mlkit) and get GitHubInfo
-
-        // https://github.com/capacitor-community/capacitor-googlemaps-native.git
         let part = plugin.repo.replace('https://github.com/', '').replace('.git', '').replace('ssh://git@', '');
         if (part.includes('#')) {
             part = part.substring(0, part.indexOf('#') - 1);

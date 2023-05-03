@@ -1,65 +1,53 @@
 import { PluginInfo } from './plugin-info.js';
 import { testNames, maxCapacitorVersion, minCapacitorVersion, cordovaTestNames } from './test.js';
-import { NpmInfo, getNpmInfo, inspectNpmAPI } from './npm.js';
-import { readPlugin, removeFromPluginList } from './catalog.js';
-import { inspectGitHubAPI } from './github.js';
+import { NpmInfo, getNpmInfo, applyNpmDownloads } from './npm.js';
+import { readPlugin, removeFromPluginList } from './summary.js';
+import { applyGithubInfo } from './github.js';
 
-export async function inspect(plugin: string): Promise<PluginInfo> {
-    const result: PluginInfo = readPlugin(plugin);
-    await prepareProject(plugin, result);    
-    return result;
+export async function inspectPlugin(name: string): Promise<PluginInfo> {
+    const plugin: PluginInfo = readPlugin(name);
+    await applyNpmInfo(plugin);
+
+    if (plugin.repo?.includes('github.com')) {
+        await applyGithubInfo(plugin);
+    }
+    await applyNpmDownloads(plugin);
+    return plugin;
 }
 
-// This returns false only if the plugin could not be found
-async function prepareProject(name: string, plugin: PluginInfo): Promise<void> {
-    const priorVersion = plugin.version;
+async function applyNpmInfo(plugin: PluginInfo) {
     let v, vlatest: NpmInfo;
-    try {
-        // Get Latest Plugin version number
-        //json = await run(`npm view ${plugin} --json`, folder);
-        v = await getNpmInfo(name, false);
-        vlatest = await getNpmInfo(name, true); // This get additional package info
+    v = await getNpmInfo(plugin.name, false);
+    vlatest = await getNpmInfo(plugin.name, true); // This get additional package info
 
-        plugin.version = v.version;
-        plugin.versions = v.versions;
-        plugin.author = v.author;
-        plugin.description = v.description;
-        plugin.bugs = v.bugs?.url;
-        plugin.published = v.time[v.version];
-        if (!plugin.published) {
-            plugin.published = v?.created;
-        }
-        plugin.license = v.license;
-        plugin.repo = cleanUrl(v.repository?.url);
-        plugin.keywords = v.keywords;
-        if (vlatest.cordova) {
-            plugin.platforms = vlatest.cordova.platforms;
-        }
-        if (vlatest.capacitor) {
-            plugin.platforms = [];
-            if (vlatest.capacitor.ios) plugin.platforms.push('ios');
-            if (vlatest.capacitor.android) plugin.platforms.push('android');
-        }
-
-        plugin.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
-        plugin.success = cleanupBasedOnPlatforms(plugin.success, plugin.platforms);
-        plugin.fails = [];
-        for (const test of testNames()) {
-            if (!plugin.success.includes(test)) {
-                plugin.fails.push(test);
-            }
-        }
-    } catch (error) {
-        console.error(`Failed preparation for ${name}:${error}`);
+    plugin.version = v.version;
+    plugin.versions = v.versions;
+    plugin.author = v.author;
+    plugin.description = v.description;
+    plugin.bugs = v.bugs?.url;
+    plugin.published = v.time[v.version];
+    if (!plugin.published) {
+        plugin.published = v?.created;
+    }
+    plugin.license = v.license;
+    plugin.repo = cleanUrl(v.repository?.url);
+    plugin.keywords = v.keywords;
+    if (vlatest.cordova) {
+        plugin.platforms = vlatest.cordova.platforms;
+    }
+    if (vlatest.capacitor) {
+        plugin.platforms = [];
+        if (vlatest.capacitor.ios) plugin.platforms.push('ios');
+        if (vlatest.capacitor.android) plugin.platforms.push('android');
     }
 
-    try {
-        if (plugin.repo?.includes('github.com')) {
-            await inspectGitHubAPI(plugin);
+    plugin.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
+    plugin.success = cleanupBasedOnPlatforms(plugin.success, plugin.platforms);
+    plugin.fails = [];
+    for (const test of testNames()) {
+        if (!plugin.success.includes(test)) {
+            plugin.fails.push(test);
         }
-        await inspectNpmAPI(plugin);
-    } catch (e) {
-        console.error(`Failed preparation for ${name}`);
     }
 }
 

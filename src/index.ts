@@ -1,8 +1,6 @@
-import { inspect } from './inspect.js';
-import { catalog, readPluginList } from './catalog.js';
-import { hasArg } from './utils.js';
-
-import { prepare } from './prepare.js';
+import { inspectPlugin } from './inspect.js';
+import { store, readPluginList } from './summary.js';
+import { writePluginSummary } from './write.js';
 import { checkSecretsAreSet, secretList } from './secrets.js';
 
 const args = process.argv;
@@ -14,22 +12,22 @@ if (!checkSecretsAreSet()) {
     process.exit();
 }
 
-if (hasArg('all', args) || !dep) {
+if (!dep) {
     console.log('Inspecting all plugins...');
-    go(readPluginList());
+    inspectPlugins(readPluginList());
 } else {
     console.log(`Inspecting ${dep}...`);
-    go([dep]);
+    inspectPlugins([dep]);
 }
 
-async function go(plugins: string[]) {
+async function inspectPlugins(plugins: string[]) {
     let count = 0;
 
     for (const plugin of plugins) {
         count++;
         console.log(`Inspecting ${count} of ${plugins.length}: ${plugin}`);
-        catalog(await inspect(plugin));
-
+        store(await inspectPlugin(plugin));
     }
-    prepare();
+    const wrote = writePluginSummary();
+    console.log(`${wrote} working plugins found.`);
 }
