@@ -2,7 +2,7 @@ import { httpGet } from "./cache.js"
 import { PluginInfo } from "./plugin-info.js"
 import { getNpmToken } from "./secrets.js"
 
-export interface NPMView {
+export interface NpmInfo {
   _id: string
   _rev: string
   name: string
@@ -89,14 +89,14 @@ export interface NpmOperationalInternal {
   tmp: string
 }
 
-export interface NPMInfo {
+export interface NpmDownloads {
   downloads: number
   start: string
   end: string
   package: string
 }
 
-export async function getNpmView(name: string, latest: boolean): Promise<NPMView> {
+export async function getNpmInfo(name: string, latest: boolean): Promise<NpmInfo> {
   let url = '';
   try {
     url = latest
@@ -104,7 +104,7 @@ export async function getNpmView(name: string, latest: boolean): Promise<NPMView
       : `https://registry.npmjs.org/${name}`;
     // const response = await fetch(url, { headers });
     // const np: NPMView = await response.json() as NPMView;
-    const np: NPMView = await httpGet(url, npmHeaders());
+    const np: NpmInfo = await httpGet(url, npmHeaders());
     np.versions = undefined;
     np.version = np['dist-tags'] ? np['dist-tags'].latest : np.version;
     return np;
@@ -115,7 +115,7 @@ export async function getNpmView(name: string, latest: boolean): Promise<NPMView
 
 export async function inspectNpmAPI(plugin: PluginInfo) {
   try {
-      const np: NPMInfo = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${plugin.name}`, npmHeaders());        
+      const np: NpmDownloads = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${plugin.name}`, npmHeaders());        
       plugin.downloads = np.downloads;
   } catch (error) {
       console.error('inspectNpmAPI Failed', error.message);

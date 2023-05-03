@@ -1,6 +1,6 @@
 import { PluginInfo } from './plugin-info.js';
 import { testNames, maxCapacitorVersion, minCapacitorVersion, cordovaTestNames } from './test.js';
-import { NPMView, getNpmView, inspectNpmAPI } from './npm-view.js';
+import { NpmInfo, getNpmInfo, inspectNpmAPI } from './npm.js';
 import { readPlugin, removeFromPluginList } from './catalog.js';
 import { inspectGitHubAPI } from './github.js';
 
@@ -13,12 +13,12 @@ export async function inspect(plugin: string): Promise<PluginInfo> {
 // This returns false only if the plugin could not be found
 async function prepareProject(name: string, plugin: PluginInfo): Promise<void> {
     const priorVersion = plugin.version;
-    let v, vlatest: NPMView;
+    let v, vlatest: NpmInfo;
     try {
         // Get Latest Plugin version number
         //json = await run(`npm view ${plugin} --json`, folder);
-        v = await getNpmView(name, false);
-        vlatest = await getNpmView(name, true); // This get additional package info
+        v = await getNpmInfo(name, false);
+        vlatest = await getNpmInfo(name, true); // This get additional package info
 
         plugin.version = v.version;
         plugin.versions = v.versions;
@@ -77,7 +77,7 @@ function cleanupBasedOnPlatforms(tests: string[], platforms: string[]): string[]
     });
 }
 
-function getCapacitorVersions(p: NPMView): string[] {
+function getCapacitorVersions(p: NpmInfo): string[] {
     let cap: string = capCoreDeps(p);
     const result = [];
     if (likelyCordova(p)) {
@@ -121,7 +121,7 @@ function getCapacitorVersions(p: NPMView): string[] {
     return result;
 }
 
-function capCoreDeps(p: NPMView): string {
+function capCoreDeps(p: NpmInfo): string {
     let cap = p.peerDependencies ? p.peerDependencies['@capacitor/core'] : undefined;
     if (!cap) {
         cap = p.dependencies ? p.dependencies['@capacitor/core'] : undefined;
@@ -137,7 +137,7 @@ function capCoreDeps(p: NPMView): string {
     return cap;
 }
 
-function likelyCordova(p: NPMView): boolean {
+function likelyCordova(p: NpmInfo): boolean {
     if (p.cordova?.platforms) return true;
     if (p.engines && p.engines['cordova']) return true;
     if (p.dependencies && p.dependencies['cordova-android']) return true;
@@ -146,7 +146,7 @@ function likelyCordova(p: NPMView): boolean {
     return false;
 }
 
-function getCordovaVersions(p: NPMView): string[] {
+function getCordovaVersions(p: NpmInfo): string[] {
     const result = [];
     const isCapacitor = !!capCoreDeps(p);
 
