@@ -1,5 +1,6 @@
 import { httpGet } from "./cache.js"
-import { Inspection } from "./inspection.js"
+import { PluginInfo } from "./plugin-info.js"
+import { getNpmToken } from "./secrets.js"
 
 export interface NPMView {
   _id: string
@@ -112,20 +113,20 @@ export async function getNpmView(name: string, latest: boolean): Promise<NPMView
   }
 }
 
-export async function inspectNpmAPI(item: Inspection) {
+export async function inspectNpmAPI(plugin: PluginInfo) {
   try {
-      const np: NPMInfo = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${item.name}`, npmHeaders());        
-      item.downloads = np.downloads;
+      const np: NPMInfo = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${plugin.name}`, npmHeaders());        
+      plugin.downloads = np.downloads;
   } catch (error) {
       console.error('inspectNpmAPI Failed', error.message);
   }
 }
 
 function npmHeaders(): any {
-  const token = process.env.NPM_PERSONAL_TOKEN;
+  const token = getNpmToken();
   let opts: any = { };
   if (!token || token == '') {
-    console.warn(`NPM API calls can use a tokenby setting environment variable NPM_PERSONAL_TOKEN`);
+    console.warn(`NPM API calls can use a token by setting environment variable NPM_PERSONAL_TOKEN`);
   } else {      
      opts.headers = { };
      opts.headers['Authorization'] = `bearer ${token}`;

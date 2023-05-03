@@ -1,73 +1,35 @@
 import { inspect } from './inspect.js';
 import { catalog, readPluginList } from './catalog.js';
 import { hasArg } from './utils.js';
-import { filter, FilterType } from './filter.js';
-import { Test, TestInfo } from './test.js';
+
 import { prepare } from './prepare.js';
+import { checkSecretsAreSet, secretList } from './secrets.js';
 
 const args = process.argv;
 const dep = args[2];
 
 
-if (!process.env.GH_PERSONAL_TOKEN) {
-    console.error(`GH_PERSONAL_TOKEN is undefined`);
-    process.exit();
-}
-if (!process.env.GH_PERSONAL_TOKEN_IONIC) {
-    console.error(`GH_PERSONAL_TOKEN_IONIC is undefined`);
+if (!checkSecretsAreSet()) {
+    console.error(`Some required variables are not set (${secretList()})`)
     process.exit();
 }
 
 if (hasArg('all', args) || !dep) {
     console.log('Inspecting all plugins...');
-    go(readPluginList(), FilterType.all);
-} else if (hasArg('failed', args)) {
-    console.log('Inspecting failed plugins...');
-    go(filter(readPluginList(), FilterType.failed), FilterType.failed);
-} else if (hasArg('new', args)) {
-    console.log('Inspecting new plugins...');
-    go(filter(readPluginList(), FilterType.new), FilterType.new);
-} else if (hasArg('missing', args)) {
-    console.log('Inspecting plugins with missing tests...');
-    go(filter(readPluginList(), FilterType.missing), FilterType.missing);
+    go(readPluginList());
 } else {
     console.log(`Inspecting ${dep}...`);
-    go([dep], FilterType.all);
+    go([dep]);
 }
 
-async function go(plugins: string[], filterType: FilterType) {
+async function go(plugins: string[]) {
     let count = 0;
-
-    // Capacitor 5 test
-    const capacitor5: TestInfo = {
-        ios: Test.capacitorIos5,
-        android: Test.capacitorAndroid5,
-    }
-
-    // Capacitor 4 test
-    const capacitor4: TestInfo = {
-        ios: Test.capacitorIos4,
-        android: Test.capacitorAndroid4,
-    }
-
-    // Capacitor 3 test
-    const capacitor3: TestInfo = {
-        ios: Test.capacitorIos3,
-        android: Test.capacitorAndroid3,
-    }
-
-    const cordova: TestInfo = {
-        ios: Test.cordovaIos6,
-        android: Test.cordovaAndroid11,
-    }
 
     for (const plugin of plugins) {
         count++;
         console.log(`Inspecting ${count} of ${plugins.length}: ${plugin}`);
-        for (const test of [capacitor5, cordova, capacitor4, capacitor3]) {
-            const inspection = await inspect(plugin, test, filterType);
-            catalog(inspection);
-        }
+        catalog(await inspect(plugin));
+
     }
     prepare();
 }

@@ -1,74 +1,65 @@
-import { Inspection } from './inspection.js';
-import { Test, TestInfo, TestNames, maxCapacitorVersion, minCapacitorVersion } from './test.js';
+import { PluginInfo } from './plugin-info.js';
+import { testNames, maxCapacitorVersion, minCapacitorVersion, cordovaTestNames } from './test.js';
 import { NPMView, getNpmView, inspectNpmAPI } from './npm-view.js';
 import { readPlugin, removeFromPluginList } from './catalog.js';
 import { inspectGitHubAPI } from './github.js';
-import { FilterType } from './filter.js';
 
-export async function inspect(plugin: string, info: TestInfo, filterType: FilterType): Promise<Inspection> {
-    const result: Inspection = readPlugin(plugin);
-    await prepareProject(plugin, result);
-    if (filterType == FilterType.failed || filterType == FilterType.missing) {
-        if (result.success.includes(info.android)) {
-            info.android = Test.noOp;
-        }
-        if (result.success.includes(info.ios)) {
-            info.ios = Test.noOp;
-        }
-    }
+export async function inspect(plugin: string): Promise<PluginInfo> {
+    const result: PluginInfo = readPlugin(plugin);
+    await prepareProject(plugin, result);    
     return result;
 }
 
 // This returns false only if the plugin could not be found
-async function prepareProject(plugin: string, result: Inspection): Promise<void> {
-    const priorVersion = result.version;
+async function prepareProject(name: string, plugin: PluginInfo): Promise<void> {
+    const priorVersion = plugin.version;
     let v, vlatest: NPMView;
     try {
         // Get Latest Plugin version number
         //json = await run(`npm view ${plugin} --json`, folder);
-        v = await getNpmView(plugin, false);
-        vlatest = await getNpmView(plugin, true); // This get additional package info
+        v = await getNpmView(name, false);
+        vlatest = await getNpmView(name, true); // This get additional package info
 
-        result.version = v.version;
-        result.versions = v.versions;
-        result.author = v.author;
-        result.description = v.description;
-        result.bugs = v.bugs?.url;
-        result.published = v.time[v.version];
-        if (!result.published) {
-            result.published = v?.created;
+        plugin.version = v.version;
+        plugin.versions = v.versions;
+        plugin.author = v.author;
+        plugin.description = v.description;
+        plugin.bugs = v.bugs?.url;
+        plugin.published = v.time[v.version];
+        if (!plugin.published) {
+            plugin.published = v?.created;
         }
-        result.license = v.license;
-        result.repo = cleanUrl(v.repository?.url);
-        result.keywords = v.keywords;
+        plugin.license = v.license;
+        plugin.repo = cleanUrl(v.repository?.url);
+        plugin.keywords = v.keywords;
         if (vlatest.cordova) {
-            result.platforms = vlatest.cordova.platforms;
+            plugin.platforms = vlatest.cordova.platforms;
         }
         if (vlatest.capacitor) {
-            result.platforms = [];
-            if (vlatest.capacitor.ios) result.platforms.push('ios');
-            if (vlatest.capacitor.android) result.platforms.push('android');
+            plugin.platforms = [];
+            if (vlatest.capacitor.ios) plugin.platforms.push('ios');
+            if (vlatest.capacitor.android) plugin.platforms.push('android');
         }
 
-        result.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
-        result.success = cleanupBasedOnPlatforms(result.success, result.platforms);
-        result.fails = [];
-        for (const test of TestNames) {
-            if (!result.success.includes(test as any)) {
-                result.fails.push(test as any);
+        plugin.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
+        plugin.success = cleanupBasedOnPlatforms(plugin.success, plugin.platforms);
+        plugin.fails = [];
+        for (const test of testNames()) {
+            if (!plugin.success.includes(test)) {
+                plugin.fails.push(test);
             }
         }
     } catch (error) {
-        console.error(`Failed preparation for ${plugin}:${error}`);
+        console.error(`Failed preparation for ${name}:${error}`);
     }
 
     try {
-        if (result.repo?.includes('github.com')) {
-            await inspectGitHubAPI(result);
+        if (plugin.repo?.includes('github.com')) {
+            await inspectGitHubAPI(plugin);
         }
-        await inspectNpmAPI(result);
+        await inspectNpmAPI(plugin);
     } catch (e) {
-        console.error(`Failed preparation for ${plugin}`);
+        console.error(`Failed preparation for ${name}`);
     }
 }
 
@@ -79,7 +70,7 @@ function cleanUrl(url: string): string {
     return url;
 }
 
-function cleanupBasedOnPlatforms(tests: Test[], platforms: string[]): Test[] {
+function cleanupBasedOnPlatforms(tests: string[], platforms: string[]): string[] {
     return tests.filter((test) => {
         return (test.includes('ios') && platforms.includes('ios')) ||
             (test.includes('android') && platforms.includes('android'))
@@ -160,8 +151,9 @@ function getCordovaVersions(p: NPMView): string[] {
     const isCapacitor = !!capCoreDeps(p);
 
     if (!isCapacitor && likelyCordova(p)) {
-        result.push(Test.cordovaAndroid11);
-        result.push(Test.cordovaIos6);
+        for (let cordova of cordovaTestNames()) {
+            result.push(cordova);
+        }
     }
     return result;
 }

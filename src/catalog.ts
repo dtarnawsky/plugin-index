@@ -1,28 +1,16 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { Inspection } from './inspection.js';
-import { Test } from './test.js';
+import { PluginInfo } from './plugin-info.js';
 import { hasArg } from './utils.js';
-import { clear, get, set } from './mem-data.js';
+import { get, set } from './mem-data.js';
 
-export function catalog(inspection: Inspection) {
-    if (inspection.fails.includes(Test.failedInNPM)) {
-        removePlugin(inspection.name);
-        return;
-    }
-
+export function catalog(plugin: PluginInfo) {
     // De-duplicate tests
-    inspection.fails = [...new Set(inspection.fails)];
-    inspection.success = [...new Set(inspection.success)];
+    plugin.fails = [...new Set(plugin.fails)];
+    plugin.success = [...new Set(plugin.success)];
 
     // Save to data folder
-    set(inspection.name, inspection);
-}
-
-function removePlugin(plugin: string) {
-    if (hasData(plugin)) {
-        clear(plugin);
-    }
+    set(plugin.name, plugin);
 }
 
 export function writePluginList(name: string) {
@@ -64,7 +52,7 @@ export function hasData(plugin: string): boolean {
     return get(plugin) !== undefined;
 }
 
-export function readPlugin(plugin: string): Inspection {
+export function readPlugin(plugin: string): PluginInfo {
     const data = get(plugin);
     if (data) return cleanupPlugin(data);
     return {
@@ -83,7 +71,7 @@ export function readPlugin(plugin: string): Inspection {
     };
 }
 
-function cleanupPlugin(i: Inspection): Inspection {
+function cleanupPlugin(i: PluginInfo): PluginInfo {
     // Identity Vault has no keywords
     if (i.name == '@ionic-enterprise/identity-vault') {
         i.keywords = [

@@ -1,17 +1,11 @@
-import { Inspection } from "./inspection.js";
+import { PluginInfo } from "./plugin-info.js";
 
 let data = {};
 
-export function set(name: string, plugin: Inspection) {
+export function set(name: string, plugin: PluginInfo) {
     data[name] = plugin;
 }
 
-export function get(name: string): Inspection {
+export function get(name: string): PluginInfo {
     return data[name];
-}
-
-export function clear(name: string) {
-    if (data[name]) {
-        delete data[name];
-    }
 }

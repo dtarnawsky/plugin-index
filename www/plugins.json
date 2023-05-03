@@ -1936,23 +1936,6 @@
       "keywords": []
     },
     {
-      "name": "@pantrist/capacitor-firebase-dynamic-links",
-      "description": "Capacitor Plugin for Firebase Dynamic Links",
-      "keywords": []
-    },
-    {
-      "name": "@pantrist/capacitor-plugin-ml-kit-text-recognition",
-      "description": "Capacitor Wrapper for TextRecognition of Gogoles ML-Kit",
-      "keywords": [
-        "ml kit",
-        "ml",
-        "kit",
-        "text recognition",
-        "text",
-        "recognition"
-      ]
-    },
-    {
       "name": "@paystory/capacitor-headwind-mdm",
       "description": "Capacitor wrapper for Headwind MDM",
       "keywords": [

@@ -1,5 +1,6 @@
 import { httpGet, rateLimited } from './cache.js';
-import { Inspection } from './inspection.js';
+import { PluginInfo } from './plugin-info.js';
+import { getGitHubToken, getIonicGithubToken } from './secrets.js';
 
 interface GitHubInfo {
     id: number
@@ -137,20 +138,20 @@ interface Organization {
     site_admin: boolean
 }
 
-export async function inspectGitHubAPI(item: Inspection) {
+export async function inspectGitHubAPI(plugin: PluginInfo) {
     try {
         // call api (eg https://api.github.com/repos/capawesome-team/capacitor-mlkit) and get GitHubInfo
 
         // https://github.com/capacitor-community/capacitor-googlemaps-native.git
-        let part = item.repo.replace('https://github.com/', '').replace('.git', '').replace('ssh://git@', '');
+        let part = plugin.repo.replace('https://github.com/', '').replace('.git', '').replace('ssh://git@', '');
         if (part.includes('#')) {
             part = part.substring(0, part.indexOf('#') - 1);
         }
-        let token = process.env.GH_PERSONAL_TOKEN;
+        let token = getGitHubToken();
 
         // TOKEN should be able to get info on private package
-        if (item.name.startsWith('@ionic-enterprise')) {
-            token = process.env.GH_PERSONAL_TOKEN_IONIC;
+        if (plugin.name.startsWith('@ionic-enterprise')) {
+            token = getIonicGithubToken();
         }
         let headers = {};
         if (!token || token == '') {
@@ -172,39 +173,38 @@ export async function inspectGitHubAPI(item: Inspection) {
                     console.log(`   Retry ${count} for ${part}`);
                     await sleep(1000 + Math.random() * 10000);
                 } else if ((gh as any).message?.startsWith('Not Found')) {
-                    item.repo = undefined;
+                    plugin.repo = undefined;
                 } else if (gh.full_name != part) {
                     console.error(`Failed to get info on repo ${part}`);
                     console.error(gh);
                 } else {
-                    item.stars = 0;
+                    plugin.stars = 0;
                 }
             }
         }
-        item.stars = gh.stargazers_count;
-        item.image = gh.owner?.avatar_url;
-        item.fork = gh.fork;
-        if (!item.keywords) {
-            item.keywords = [];
+        plugin.stars = gh.stargazers_count;
+        plugin.image = gh.owner?.avatar_url;
+        plugin.fork = gh.fork;
+        if (!plugin.keywords) {
+            plugin.keywords = [];
         }
         if (gh.topics) {
             for (const topic of gh.topics) {
-
-                if (!item.keywords.includes(topic)) {
-                    item.keywords.push(topic);
+                if (!plugin.keywords.includes(topic)) {
+                    plugin.keywords.push(topic);
                 }
             }
         }
-        if (!item.description) {
-            item.description = gh.description;
+        if (!plugin.description) {
+            plugin.description = gh.description;
         }
-        item.quality = 0;
-        item.updated = gh.updated_at;
-        item.quality += gh.open_issues_count;
-        item.quality += gh.watchers_count;
-        item.quality += gh.forks_count;
+        plugin.quality = 0;
+        plugin.updated = gh.updated_at;
+        plugin.quality += gh.open_issues_count;
+        plugin.quality += gh.watchers_count;
+        plugin.quality += gh.forks_count;
         if (!gh.fork) {
-            item.quality += 100;
+            plugin.quality += 100;
         }
     } catch (error) {
         console.error('inspectGitHubAPI Failed', error);

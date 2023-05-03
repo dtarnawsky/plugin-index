@@ -1,6 +1,4 @@
-import { Test } from './test.js';
-
-export interface Inspection {
+export interface PluginInfo {
     name: string,
     author: string,
     published: string, // Date Time published to npm
@@ -9,8 +7,8 @@ export interface Inspection {
     versions: string[],
     keywords: string[],
     repo: string,
-    success: Test[],
-    fails: Test[],
+    success: string[],
+    fails: string[],
     platforms: string[], // Platforms supported
     bugs?: string, // URL for bugs
     stars?: number, // Github stars
