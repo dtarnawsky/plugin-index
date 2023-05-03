@@ -1,9 +1,8 @@
-export const minCapacitorVersion = 2;
-export const maxCapacitorVersion = 5;
+export const capacitorVersions = [2,3,4,5];
 
 export function testNames(): string[] {
     const result = [];
-    for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
+    for (let version of capacitorVersions) {
         result.push(`capacitor-ios-${version}`);
         result.push(`capacitor-android-${version}`);
     }

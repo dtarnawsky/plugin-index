@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 import { readPlugin, readPluginList } from "./summary.js";
-import { PluginInfo } from "./plugin-info.js";
+import { PluginInfo } from "./types/plugin.js";
 
 interface Summary {
     plugins: PluginInfo[];

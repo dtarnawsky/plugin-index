@@ -1,8 +1,9 @@
 import { httpGet } from "./http.js"
-import { PluginInfo } from "./plugin-info.js"
+import { PluginInfo } from "./types/plugin.js"
 import { getNpmToken } from "./secrets.js"
 import { removeFromPluginList } from "./summary.js"
-import { cordovaTestNames, maxCapacitorVersion, minCapacitorVersion, testNames } from "./test.js"
+import { capacitorVersions, cordovaTestNames, testNames } from "./test.js"
+import { NpmDownloads, NpmInfo } from './types/npm.js'
 
 export async function applyNpmInfo(plugin: PluginInfo) {
   const [npmHistory, npmLatest] = await Promise.all([
@@ -94,12 +95,12 @@ function getCapacitorVersions(p: NpmInfo): string[] {
   const result = [];
   if (likelyCordova(p)) {
       const t = [];
-      for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
+      for (let version of capacitorVersions) {
           t.push(`^${version}.0.0`);
       }
       cap = t.join(' | ');
   }
-  for (let version = minCapacitorVersion; version <= maxCapacitorVersion; version++) {
+  for (let version of capacitorVersions) {
       let match = false;
 
       if (cap?.includes(`>`) && !cap?.includes(`>=`)) {
@@ -170,97 +171,3 @@ function getCordovaVersions(p: NpmInfo): string[] {
   return result;
 }
 
-interface NpmInfo {
-  _id: string
-  _rev: string
-  name: string
-  "dist-tags": DistTags
-  versions: string[]
-  time: any,
-  created: string,
-  maintainers: string[]
-  description: string
-  homepage: string
-  keywords: string[]
-  repository: Repository
-  author: string
-  bugs: Bugs
-  license: string
-  readmeFilename: string
-  _cached: boolean
-  _contentLength: number
-  version: string
-  main: string
-  module: string
-  types: string
-  unpkg: string
-  scripts: any,
-  devDependencies: any,
-  peerDependencies: any,
-  dependencies: any,
-  prettier: string
-  swiftlint: string,
-  gitHead: string,
-  engines: any,
-  _nodeVersion: string
-  _npmVersion: string
-  dist: Dist
-  cordova: CordovaInfo
-  capacitor: CapacitorInfo
-  _npmUser: string
-  directories: Directories
-  _npmOperationalInternal: NpmOperationalInternal
-  _hasShrinkwrap: boolean
-}
-
-interface CordovaInfo {
-  platforms: string[]
-}
-
-interface CapacitorInfo {
-  ios: any;
-  android: any;
-}
-
-interface DistTags {
-  latest: string
-  next: string
-}
-
-interface Repository {
-  type: string
-  url: string
-}
-
-interface Bugs {
-  url: string
-}
-
-interface Dist {
-  integrity: string
-  shasum: string
-  tarball: string
-  fileCount: number
-  unpackedSize: number
-  signatures: Signature[]
-  "npm-signature": string
-}
-
-interface Signature {
-  keyid: string
-  sig: string
-}
-
-interface Directories { }
-
-interface NpmOperationalInternal {
-  host: string
-  tmp: string
-}
-
-interface NpmDownloads {
-  downloads: number
-  start: string
-  end: string
-  package: string
-}

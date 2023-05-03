@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { PluginInfo } from './plugin-info.js';
+import { PluginInfo } from './types/plugin.js';
 
 let data = {};
 

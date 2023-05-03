@@ -1,7 +1,7 @@
 import { store, readPluginList, readPlugin } from './summary.js';
 import { writePluginSummary } from './write.js';
 import { checkSecretsAreSet, secretList } from './secrets.js';
-import { PluginInfo } from './plugin-info.js';
+import { PluginInfo } from './types/plugin.js';
 import { applyNpmDownloads, applyNpmInfo } from './npm.js';
 import { applyGithubInfo } from './github.js';
 
