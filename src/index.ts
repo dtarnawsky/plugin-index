@@ -1,11 +1,12 @@
-import { inspectPlugin } from './inspect.js';
-import { store, readPluginList } from './summary.js';
+import { store, readPluginList, readPlugin } from './summary.js';
 import { writePluginSummary } from './write.js';
 import { checkSecretsAreSet, secretList } from './secrets.js';
+import { PluginInfo } from './plugin-info.js';
+import { applyNpmDownloads, applyNpmInfo } from './npm.js';
+import { applyGithubInfo } from './github.js';
 
 const args = process.argv;
 const dep = args[2];
-
 
 if (!checkSecretsAreSet()) {
     console.error(`Some required variables are not set (${secretList()})`)
@@ -30,4 +31,15 @@ async function inspectPlugins(plugins: string[]) {
     }
     const wrote = writePluginSummary();
     console.log(`${wrote} working plugins found.`);
+}
+
+async function inspectPlugin(name: string): Promise<PluginInfo> {
+    const plugin: PluginInfo = readPlugin(name);
+    await applyNpmInfo(plugin);
+
+    if (plugin.repo?.includes('github.com')) {
+        await applyGithubInfo(plugin);
+    }
+    await applyNpmDownloads(plugin);
+    return plugin;
 }

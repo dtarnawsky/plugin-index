@@ -1,5 +1,4 @@
 export async function httpGet(url: string, opts: any): Promise<any> {
-
     const response = await fetch(url, opts);
     try {
         const data = await response.json();
@@ -10,7 +9,6 @@ export async function httpGet(url: string, opts: any): Promise<any> {
     } catch (error) {
         throw new Error(`Error: get ${url}: ${response.status} ${response.statusText}`);
     }
-
 }
 
 export function rateLimited(a: any): boolean {

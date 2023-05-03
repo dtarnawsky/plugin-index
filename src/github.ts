@@ -2,6 +2,75 @@ import { httpGet, rateLimited } from './http.js';
 import { PluginInfo } from './plugin-info.js';
 import { getGitHubToken, getIonicGithubToken } from './secrets.js';
 
+export async function applyGithubInfo(plugin: PluginInfo) {
+    try {
+        // call api (eg https://api.github.com/repos/capawesome-team/capacitor-mlkit) and get GitHubInfo
+        let part = plugin.repo.replace('https://github.com/', '').replace('.git', '').replace('ssh://git@', '');
+        if (part.includes('#')) {
+            part = part.substring(0, part.indexOf('#') - 1);
+        }
+        let token = getGitHubToken();
+
+        // TOKEN should be able to get info on private package
+        if (plugin.name.startsWith('@ionic-enterprise')) {
+            token = getIonicGithubToken();
+        }
+        const headers = { Authorization: `Bearer ${token}` };
+        let retry = true;
+        let gh: GitHubInfo;
+        let count = 0;
+        while (retry) {
+            retry = false;
+            gh = await httpGet(`https://api.github.com/repos/${part}`, { headers });
+            if (gh.stargazers_count == undefined) {
+                if (rateLimited(gh)) {
+                    retry = true;
+                    count++;
+                    console.log(`   Retry ${count} for ${part}`);
+                    await sleep(1000 + Math.random() * 10000);
+                } else if ((gh as any).message?.startsWith('Not Found')) {
+                    plugin.repo = undefined;
+                } else if (gh.full_name != part) {
+                    console.error(`Failed to get info on repo ${part}`);
+                    console.error(gh);
+                } else {
+                    plugin.stars = 0;
+                }
+            }
+        }
+        plugin.stars = gh.stargazers_count;
+        plugin.image = gh.owner?.avatar_url;
+        plugin.fork = gh.fork;
+        if (!plugin.keywords) {
+            plugin.keywords = [];
+        }
+        if (gh.topics) {
+            for (const topic of gh.topics) {
+                if (!plugin.keywords.includes(topic)) {
+                    plugin.keywords.push(topic);
+                }
+            }
+        }
+        if (!plugin.description) {
+            plugin.description = gh.description;
+        }
+        plugin.quality = 0;
+        plugin.updated = gh.updated_at;
+        plugin.quality += gh.open_issues_count;
+        plugin.quality += gh.watchers_count;
+        plugin.quality += gh.forks_count;
+        if (!gh.fork) {
+            plugin.quality += 100;
+        }
+    } catch (error) {
+        console.error('applyGithubInfo Failed', error);
+    }
+}
+
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 interface GitHubInfo {
     id: number
     node_id: string
@@ -88,7 +157,7 @@ interface GitHubInfo {
     subscribers_count: number
 }
 
-export interface Owner {
+interface Owner {
     login: string
     id: number
     node_id: string
@@ -136,79 +205,4 @@ interface Organization {
     received_events_url: string
     type: string
     site_admin: boolean
-}
-
-export async function applyGithubInfo(plugin: PluginInfo) {
-    try {
-        // call api (eg https://api.github.com/repos/capawesome-team/capacitor-mlkit) and get GitHubInfo
-        let part = plugin.repo.replace('https://github.com/', '').replace('.git', '').replace('ssh://git@', '');
-        if (part.includes('#')) {
-            part = part.substring(0, part.indexOf('#') - 1);
-        }
-        let token = getGitHubToken();
-
-        // TOKEN should be able to get info on private package
-        if (plugin.name.startsWith('@ionic-enterprise')) {
-            token = getIonicGithubToken();
-        }
-        let headers = {};
-        if (!token || token == '') {
-            console.warn(`GitHub API calls may be rate limited because you have not set environment variable GH_PERSONAL_TOKEN (https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#using-a-token-on-the-command-line)`);
-        } else {
-            headers = { Authorization: `Bearer ${token}` };
-        }
-
-        let retry = true;
-        let gh: GitHubInfo;
-        let count = 0;
-        while (retry) {
-            retry = false;
-            gh = await httpGet(`https://api.github.com/repos/${part}`, { headers });
-            if (gh.stargazers_count == undefined) {
-                if (rateLimited(gh)) {
-                    retry = true;
-                    count++;
-                    console.log(`   Retry ${count} for ${part}`);
-                    await sleep(1000 + Math.random() * 10000);
-                } else if ((gh as any).message?.startsWith('Not Found')) {
-                    plugin.repo = undefined;
-                } else if (gh.full_name != part) {
-                    console.error(`Failed to get info on repo ${part}`);
-                    console.error(gh);
-                } else {
-                    plugin.stars = 0;
-                }
-            }
-        }
-        plugin.stars = gh.stargazers_count;
-        plugin.image = gh.owner?.avatar_url;
-        plugin.fork = gh.fork;
-        if (!plugin.keywords) {
-            plugin.keywords = [];
-        }
-        if (gh.topics) {
-            for (const topic of gh.topics) {
-                if (!plugin.keywords.includes(topic)) {
-                    plugin.keywords.push(topic);
-                }
-            }
-        }
-        if (!plugin.description) {
-            plugin.description = gh.description;
-        }
-        plugin.quality = 0;
-        plugin.updated = gh.updated_at;
-        plugin.quality += gh.open_issues_count;
-        plugin.quality += gh.watchers_count;
-        plugin.quality += gh.forks_count;
-        if (!gh.fork) {
-            plugin.quality += 100;
-        }
-    } catch (error) {
-        console.error('inspectGitHubAPI Failed', error);
-    }
-}
-
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
