@@ -35,11 +35,10 @@ async function inspectPlugins(plugins: string[]) {
 
 async function inspectPlugin(name: string): Promise<PluginInfo> {
     const plugin: PluginInfo = readPlugin(name);
-    await applyNpmInfo(plugin);
+    await Promise.all([applyNpmInfo(plugin), applyNpmDownloads(plugin)]);
 
     if (plugin.repo?.includes('github.com')) {
         await applyGithubInfo(plugin);
     }
-    await applyNpmDownloads(plugin);
     return plugin;
 }

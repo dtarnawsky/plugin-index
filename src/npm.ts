@@ -5,32 +5,33 @@ import { removeFromPluginList } from "./summary.js"
 import { cordovaTestNames, maxCapacitorVersion, minCapacitorVersion, testNames } from "./test.js"
 
 export async function applyNpmInfo(plugin: PluginInfo) {
-  let v, vlatest: NpmInfo;
-  v = await getNpmInfo(plugin.name, false);
-  vlatest = await getNpmInfo(plugin.name, true); // This get additional package info
+  const [npmHistory, npmLatest] = await Promise.all([
+    getNpmInfo(plugin.name, false), 
+    getNpmInfo(plugin.name, true)
+  ]);
 
-  plugin.version = v.version;
-  plugin.versions = v.versions;
-  plugin.author = v.author;
-  plugin.description = v.description;
-  plugin.bugs = v.bugs?.url;
-  plugin.published = v.time[v.version];
+  plugin.version = npmHistory.version;
+  plugin.versions = npmHistory.versions;
+  plugin.author = npmHistory.author;
+  plugin.description = npmHistory.description;
+  plugin.bugs = npmHistory.bugs?.url;
+  plugin.published = npmHistory.time[npmHistory.version];
   if (!plugin.published) {
-      plugin.published = v?.created;
+      plugin.published = npmHistory?.created;
   }
-  plugin.license = v.license;
-  plugin.repo = cleanUrl(v.repository?.url);
-  plugin.keywords = v.keywords;
-  if (vlatest.cordova) {
-      plugin.platforms = vlatest.cordova.platforms;
+  plugin.license = npmHistory.license;
+  plugin.repo = cleanUrl(npmHistory.repository?.url);
+  plugin.keywords = npmHistory.keywords;
+  if (npmLatest.cordova) {
+      plugin.platforms = npmLatest.cordova.platforms;
   }
-  if (vlatest.capacitor) {
+  if (npmLatest.capacitor) {
       plugin.platforms = [];
-      if (vlatest.capacitor.ios) plugin.platforms.push('ios');
-      if (vlatest.capacitor.android) plugin.platforms.push('android');
+      if (npmLatest.capacitor.ios) plugin.platforms.push('ios');
+      if (npmLatest.capacitor.android) plugin.platforms.push('android');
   }
 
-  plugin.success = [...getCapacitorVersions(vlatest), ...getCordovaVersions(vlatest)] as any;
+  plugin.success = [...getCapacitorVersions(npmLatest), ...getCordovaVersions(npmLatest)] as any;
   plugin.success = cleanupBasedOnPlatforms(plugin.success, plugin.platforms);
   plugin.fails = [];
   for (const test of testNames()) {
@@ -45,7 +46,7 @@ export async function applyNpmDownloads(plugin: PluginInfo) {
     const np: NpmDownloads = await httpGet(`https://api.npmjs.org/downloads/point/last-month/${plugin.name}`, npmHeaders());
     plugin.downloads = np.downloads;
   } catch (error) {
-    console.error('inspectNpmAPI Failed', error.message);
+    console.error('applyNpmDownloads Failed', error.message);
   }
 }
 
@@ -176,6 +177,7 @@ interface NpmInfo {
   "dist-tags": DistTags
   versions: string[]
   time: any,
+  created: string,
   maintainers: string[]
   description: string
   homepage: string
